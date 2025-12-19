@@ -1,0 +1,12 @@
+{
+  "conventionalCommits.scopes": [
+    "precondition",
+    "step",
+    "postcondition",
+    "Case Modeler",
+    "RunTime/Planner",
+    "runtimw",
+    "runtime",
+    "mdp"
+  ]
+}

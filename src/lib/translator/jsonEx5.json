@@ -1,0 +1,3171 @@
+{
+  "Situation": {
+    "Id": "S1",
+    "Attributes": [
+      {
+        "Id": "690231d7fa49d8e8defd5b00",
+        "Name": "SBP",
+        "Type": "Integer",
+        "Range": [80, 180],
+        "NormalRange": [90, 120],
+        "CurrentState": 147
+      }
+    ]
+  },
+  "Goals": [
+    {
+      "Id": "G1",
+      "Attribute_reference": "SBP",
+      "Range": [90, 120],
+      "Tactics": [
+        {
+          "Id": "T1_69028433b3ee2daa2b880621",
+          "Name": "Change Lifestyle Habits",
+          "Definition": "Change Lifestyle Habits involves weight loss, reduced sodium intake, physical activity, limiting alcohol consumption, and diet.",
+          "Preconditions": [],
+          "Rules": [],
+          "Metrics": [],
+          "Activities": [
+            {
+              "Id": "A1-690284d6a60b03443683bea8",
+              "Name": "Reduce_sodium_intake",
+              "Preconditions": [
+                {
+                  "Id": "3a3a46b3",
+                  "Attribute": "SBP",
+                  "Greater-than-or-equal": 124,
+                  "AttributeType": "integer"
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "ba80baee",
+                  "Probability": 0.5,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "-",
+                      "value": 3,
+                      "_id": 1761772998676
+                    }
+                  ]
+                },
+                {
+                  "Id": "ee0f5ddb",
+                  "Probability": 0.4,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "-",
+                      "value": 2,
+                      "_id": 1761773021377
+                    }
+                  ]
+                },
+                {
+                  "Id": "ec6ccde2",
+                  "Probability": 0.1,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "-",
+                      "value": 1,
+                      "_id": 1761773044265
+                    }
+                  ]
+                }
+              ],
+              "Cost": 0
+            },
+            {
+              "Id": "A2-6902860ebac13bf301d228b4",
+              "Name": "Increase_fruit_and_vegetables_consumption",
+              "Preconditions": [
+                {
+                  "Id": "01d228b5",
+                  "Attribute": "SBP",
+                  "Less-than-or-equal": 126,
+                  "AttributeType": "integer"
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "01d228b7",
+                  "Probability": 0.7,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "-",
+                      "value": 6,
+                      "_id": 1761773264333
+                    }
+                  ]
+                },
+                {
+                  "Id": "01d228b9",
+                  "Probability": 0.2,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "-",
+                      "value": 4,
+                      "_id": 1761773280217
+                    }
+                  ]
+                },
+                {
+                  "Id": "ba80baf0",
+                  "Probability": 0.1,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d9fa49d8e8defd5b01",
+                      "operator": "-",
+                      "value": 1,
+                      "_id": 1761773299396
+                    }
+                  ]
+                }
+              ],
+              "Cost": 5
+            }
+          ]
+        },
+        {
+          "Id": "T2_69028753bac13bf301d228ba",
+          "Name": "Administer Beta-blocker (BB)",
+          "Definition": "Beta-blockers reduce heart rate and the force of contraction by blocking the effects of adrenaline (epinephrine) on beta-adrenergic receptors. This tactic includes three possible actions: stopping the drug, maintaining the current dosage, or increasing the dosage. It has a metric to track the maximum number of doses a patient can be prescribed. This tactic adds side effects to the application of the drugs.",
+          "Preconditions": [],
+          "Rules": [],
+          "Metrics": [
+            {
+              "Id": "6902877c12d92b0cee0f5ddd",
+              "Variable": "BB",
+              "Definition": "Number of dosage BB",
+              "Type": "Integer",
+              "Range": [0, 2],
+              "NormalRange": [0, 2]
+            },
+            {
+              "Id": "6902877e12d92b0cee0f5dde",
+              "Variable": "SEBB",
+              "Definition": "Side effects BB",
+              "Type": "Boolean",
+              "Range": [0, 1],
+              "NormalRange": [0, 1]
+            }
+          ],
+          "Activities": [
+            {
+              "Id": "A1-690288d712d92b0cee0f5de0",
+              "Name": "Stop_the_treatment_with_BB",
+              "Preconditions": [
+                {
+                  "Id": "43ae9d09",
+                  "Metric": "BB",
+                  "Greater-than": 0,
+                  "MetricType": "integer"
+                },
+                {
+                  "Id": "258b7b82",
+                  "Attribute": "N",
+                  "Greater-than": 0,
+                  "AttributeType": "integer"
+                },
+                {
+                  "Id": "258b7b84",
+                  "Metric": "SEBB",
+                  "Equal": 1,
+                  "MetricType": "boolean"
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "0c03f56e",
+                  "Probability": 0.2,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "+",
+                      "value": 0,
+                      "_id": 1761774187365
+                    },
+                    {
+                      "idAttribute": "6902877c12d92b0cee0f5ddd",
+                      "operator": "=",
+                      "value": 0,
+                      "_id": 1761774219672
+                    }
+                  ]
+                },
+                {
+                  "Id": "0c03f570",
+                  "Probability": 0.8,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "+",
+                      "value": 3,
+                      "_id": 1761774251232
+                    },
+                    {
+                      "idAttribute": "6902877c12d92b0cee0f5ddd",
+                      "operator": "=",
+                      "value": 0,
+                      "_id": 1761774252155
+                    }
+                  ]
+                }
+              ],
+              "Cost": 0
+            },
+            {
+              "Id": "A2-69028c67280668c9ba80baf2",
+              "Name": "Keep_the_current_dosage_of_BB",
+              "Preconditions": [
+                {
+                  "Id": "b782e25b",
+                  "Attribute": "SBP",
+                  "Greater-than": 120,
+                  "AttributeType": "integer"
+                },
+                {
+                  "Id": "6e4b924f",
+                  "Attribute": "SBP",
+                  "Less-than": 130,
+                  "AttributeType": "integer"
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "c4e4e91f",
+                  "Probability": 0.7,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "+",
+                      "value": 0,
+                      "_id": 1761775052058
+                    }
+                  ]
+                },
+                {
+                  "Id": "4dbd1a18",
+                  "Probability": 0.3,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "+",
+                      "value": 3,
+                      "_id": 1761775089448
+                    }
+                  ]
+                }
+              ],
+              "Cost": 0
+            },
+            {
+              "Id": "A3-690293be63c5e3414afd3886",
+              "Name": "Increase_dosage_of_BB",
+              "Preconditions": [
+                {
+                  "Id": "0cf23233",
+                  "Attribute": "SBP",
+                  "Greater-than": 130,
+                  "AttributeType": "integer"
+                },
+                {
+                  "Id": "0bc807b2",
+                  "Attribute": "N",
+                  "Less-than": 8,
+                  "AttributeType": "integer"
+                },
+                {
+                  "Id": "0bc807b4",
+                  "Metric": "BB",
+                  "Less-than": 2,
+                  "MetricType": "integer"
+                },
+                {
+                  "Id": "0cf23235",
+                  "Metric": "SEBB",
+                  "Equal": 0,
+                  "MetricType": "boolean"
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "2cce9c0f",
+                  "Probability": 0.65,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "-",
+                      "value": 7,
+                      "_id": 1761777065063
+                    },
+                    {
+                      "idAttribute": "6902877c12d92b0cee0f5ddd",
+                      "operator": "+",
+                      "value": 1,
+                      "_id": 1761777074282
+                    }
+                  ]
+                },
+                {
+                  "Id": "fc0c449d",
+                  "Probability": 0.29,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "-",
+                      "value": 3,
+                      "_id": 1761777100578
+                    },
+                    {
+                      "idAttribute": "6902877c12d92b0cee0f5ddd",
+                      "operator": "+",
+                      "value": 1,
+                      "_id": 1761777107639
+                    }
+                  ]
+                },
+                {
+                  "Id": "b0f3bc9d",
+                  "Probability": 0.06,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "-",
+                      "value": 1,
+                      "_id": 1761777128006
+                    },
+                    {
+                      "idAttribute": "6902877c12d92b0cee0f5ddd",
+                      "operator": "+",
+                      "value": 1,
+                      "_id": 1761777144317
+                    },
+                    {
+                      "idAttribute": "6902877e12d92b0cee0f5dde",
+                      "operator": "=",
+                      "value": 1,
+                      "_id": 1761777155171
+                    }
+                  ]
+                }
+              ],
+              "Cost": 20
+            }
+          ]
+        },
+        {
+          "Id": "T3_690296dadd37e322ba39b40d",
+          "Name": "Administer angiotensin converting enzyme inhibitor (ACE) ",
+          "Definition": "ACE inhibitors block the enzyme that converts angiotensin I to angiotensin II, a hormone that narrows blood vessels. This causes vasodilation and reduces blood pressure. This tactic includes three possible actions: stopping the drug, maintaining the current dosage, or increasing the dosage. It has a metric to track the maximum number of doses a patient can be prescribed. This tactic adds side effects to the application of the drugs.",
+          "Preconditions": [],
+          "Rules": [],
+          "Metrics": [
+            {
+              "Id": "690296fb2e108cf4728be9b8",
+              "Variable": "ACE",
+              "Definition": "Number of dosage ACE",
+              "Type": "Integer",
+              "Range": [0, 2],
+              "NormalRange": [0, 2]
+            },
+            {
+              "Id": "69029764f2224227fc0c44a0",
+              "Variable": "SEACE",
+              "Definition": "Side Effects of ACE",
+              "Type": "Boolean",
+              "Range": [0, 1],
+              "NormalRange": [0, 1]
+            }
+          ],
+          "Activities": [
+            {
+              "Id": "A1-69029e9659c8f3078572c960",
+              "Name": "Keep_current_dosage_of_ACE",
+              "Preconditions": [
+                {
+                  "Id": "a5e7a1c0",
+                  "Attribute": "SBP",
+                  "Greater-than": 120,
+                  "AttributeType": "integer"
+                },
+                {
+                  "Id": "a5e7a1c1",
+                  "Attribute": "SBP",
+                  "Less-than": 130,
+                  "AttributeType": "integer"
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "8572c962",
+                  "Probability": 0.8,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "+",
+                      "value": 0,
+                      "_id": 1761787873278
+                    }
+                  ]
+                },
+                {
+                  "Id": "8572c964",
+                  "Probability": 0.2,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "+",
+                      "value": 3,
+                      "_id": 1761787890284
+                    }
+                  ]
+                }
+              ],
+              "Cost": 0
+            },
+            {
+              "Id": "A2-69029ac359c8f3078572c958",
+              "Name": "Stop_the_treatment_with_ACE",
+              "Preconditions": [
+                {
+                  "Id": "8e1f909b",
+                  "Metric": "SEACE",
+                  "Equal": 1,
+                  "MetricType": "boolean"
+                },
+                {
+                  "Id": "8e1f909c",
+                  "Attribute": "N",
+                  "Greater-than": 0,
+                  "AttributeType": "integer"
+                },
+                {
+                  "Id": "8e1f909e",
+                  "Metric": "ACE",
+                  "Greater-than": 0,
+                  "MetricType": "integer"
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "8572c95a",
+                  "Probability": 0.5,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "+",
+                      "value": 0,
+                      "_id": 1761780587856
+                    },
+                    {
+                      "idAttribute": "690296fb2e108cf4728be9b8",
+                      "operator": "=",
+                      "value": 0,
+                      "_id": 1761787662132
+                    }
+                  ]
+                },
+                {
+                  "Id": "8572c95c",
+                  "Probability": 0.5,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "+",
+                      "value": 3,
+                      "_id": 1761787677626
+                    },
+                    {
+                      "idAttribute": "690296fb2e108cf4728be9b8",
+                      "operator": "=",
+                      "value": 0,
+                      "_id": 1761787709399
+                    }
+                  ]
+                }
+              ],
+              "Cost": 0
+            },
+            {
+              "Id": "A3-69029eb859c8f3078572c966",
+              "Name": "Increase_dosage_of_ACE",
+              "Preconditions": [
+                {
+                  "Id": "e5ad6f21",
+                  "Attribute": "SBP",
+                  "Greater-than": 130,
+                  "AttributeType": "integer"
+                },
+                {
+                  "Id": "a426f70c",
+                  "Attribute": "N",
+                  "Less-than": 8,
+                  "AttributeType": "integer"
+                },
+                {
+                  "Id": "a426f70e",
+                  "Metric": "ACE",
+                  "Less-than": 2,
+                  "MetricType": "integer"
+                },
+                {
+                  "Id": "a426f710",
+                  "Metric": "SEACE",
+                  "Equal": 0,
+                  "MetricType": "boolean"
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "8572c969",
+                  "Probability": 0.6,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "-",
+                      "value": 6,
+                      "_id": 1761788236529
+                    },
+                    {
+                      "idAttribute": "690296fb2e108cf4728be9b8",
+                      "operator": "+",
+                      "value": 1,
+                      "_id": 1761788248013
+                    }
+                  ]
+                },
+                {
+                  "Id": "a5e7a1c3",
+                  "Probability": 0.36,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "-",
+                      "value": 3,
+                      "_id": 1761788259237
+                    },
+                    {
+                      "idAttribute": "690296fb2e108cf4728be9b8",
+                      "operator": "+",
+                      "value": 1,
+                      "_id": 1761788270121
+                    }
+                  ]
+                },
+                {
+                  "Id": "a5e7a1c5",
+                  "Probability": 0.04,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "-",
+                      "value": 1,
+                      "_id": 1761788286643
+                    },
+                    {
+                      "idAttribute": "690296fb2e108cf4728be9b8",
+                      "operator": "+",
+                      "value": 1,
+                      "_id": 1761788292364
+                    },
+                    {
+                      "idAttribute": "69029764f2224227fc0c44a0",
+                      "operator": "=",
+                      "value": 0,
+                      "_id": 1761788295938
+                    }
+                  ]
+                }
+              ],
+              "Cost": 18
+            }
+          ]
+        },
+        {
+          "Id": "T4_6902c26aec879862e504e24a",
+          "Name": "Administer Angiotensin Receptor Blockers (ARB)",
+          "Definition": "ARBs block angiotensin II receptors, preventing blood vessel constriction, similar to ACE inhibitors, but without the cough side effect. This tactic includes three possible actions: stopping the drug, maintaining the current dosage, or increasing the dosage.  It has a metric to track the maximum number of doses a patient can be prescribed. This tactic adds side effects to the application of the drugs.",
+          "Preconditions": [],
+          "Rules": [],
+          "Metrics": [
+            {
+              "Id": "6902c28fcaabf1ab2a01b6dc",
+              "Variable": "ARB",
+              "Definition": "Number of dosage ARB",
+              "Type": "Integer",
+              "Range": [0, 2],
+              "NormalRange": [0, 2]
+            },
+            {
+              "Id": "6902c291caabf1ab2a01b6dd",
+              "Variable": "SEARB",
+              "Definition": "Side Effects ARB",
+              "Type": "Boolean",
+              "Range": [0, 1],
+              "NormalRange": [0, 1]
+            }
+          ],
+          "Activities": [
+            {
+              "Id": "A1-6902c5b29a35e1bbdb91c498",
+              "Name": "Keep_the_current_dosage_of_ARB",
+              "Preconditions": [
+                {
+                  "Id": "db91c499",
+                  "Attribute": "SBP",
+                  "Greater-than": 120,
+                  "AttributeType": "integer"
+                },
+                {
+                  "Id": "db91c49a",
+                  "Attribute": "SBP",
+                  "Less-than": 130,
+                  "AttributeType": "integer"
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "b22b6331",
+                  "Probability": 0.6,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "+",
+                      "value": 0,
+                      "_id": 1761789474201
+                    }
+                  ]
+                },
+                {
+                  "Id": "316de9a0",
+                  "Probability": 0.4,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "+",
+                      "value": 3,
+                      "_id": 1761789515418
+                    }
+                  ]
+                }
+              ],
+              "Cost": 0
+            },
+            {
+              "Id": "A2-6902c3f8f92b4bed4ba97147",
+              "Name": "Stop_the_treatment_with_ARB",
+              "Preconditions": [
+                {
+                  "Id": "e504e24c",
+                  "Metric": "SEARB",
+                  "Equal": 1,
+                  "MetricType": "boolean"
+                },
+                {
+                  "Id": "3bf0afc4",
+                  "Attribute": "N",
+                  "Greater-than": 0,
+                  "AttributeType": "integer"
+                },
+                {
+                  "Id": "42b03cec",
+                  "Metric": "ARB",
+                  "Greater-than": 0,
+                  "MetricType": "integer"
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "4ba97149",
+                  "Probability": 0.5,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "+",
+                      "value": 0,
+                      "_id": 1761789207211
+                    },
+                    {
+                      "idAttribute": "6902c28fcaabf1ab2a01b6dc",
+                      "operator": "=",
+                      "value": 0,
+                      "_id": 1761789209392
+                    }
+                  ]
+                },
+                {
+                  "Id": "d1190782",
+                  "Probability": 0.5,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "+",
+                      "value": 3,
+                      "_id": 1761789289482
+                    },
+                    {
+                      "idAttribute": "6902c28fcaabf1ab2a01b6dc",
+                      "operator": "=",
+                      "value": 0,
+                      "_id": 1761789290696
+                    }
+                  ]
+                }
+              ],
+              "Cost": 0
+            },
+            {
+              "Id": "A3-6902c691378e21f7cc6a76e1",
+              "Name": "Step_without_a_description",
+              "Preconditions": [
+                {
+                  "Id": "316de9a2",
+                  "Attribute": "SBP",
+                  "Greater-than": 130,
+                  "AttributeType": "integer"
+                },
+                {
+                  "Id": "4ba9714a",
+                  "Attribute": "N",
+                  "Less-than": 8,
+                  "AttributeType": "integer"
+                },
+                {
+                  "Id": "cc6a76e3",
+                  "Metric": "ARB",
+                  "Less-than": 2,
+                  "MetricType": "integer"
+                },
+                {
+                  "Id": "e504e24f",
+                  "Metric": "SEARB",
+                  "Equal": 0,
+                  "MetricType": "boolean"
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "e504e251",
+                  "Probability": 0.4,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "-",
+                      "value": 6,
+                      "_id": 1761789810650
+                    },
+                    {
+                      "idAttribute": "6902c28fcaabf1ab2a01b6dc",
+                      "operator": "+",
+                      "value": 1,
+                      "_id": 1761789835851
+                    }
+                  ]
+                },
+                {
+                  "Id": "cc6a76e5",
+                  "Probability": 0.49,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "-",
+                      "value": 3,
+                      "_id": 1761789880054
+                    },
+                    {
+                      "idAttribute": "6902c28fcaabf1ab2a01b6dc",
+                      "operator": "+",
+                      "value": 1,
+                      "_id": 1761789881279
+                    }
+                  ]
+                },
+                {
+                  "Id": "cc6a76e7",
+                  "Probability": 0.11,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "-",
+                      "value": 1,
+                      "_id": 1761789912320
+                    },
+                    {
+                      "idAttribute": "6902c28fcaabf1ab2a01b6dc",
+                      "operator": "+",
+                      "value": 1,
+                      "_id": 1761789915459
+                    },
+                    {
+                      "idAttribute": "6902c291caabf1ab2a01b6dd",
+                      "operator": "=",
+                      "value": 1,
+                      "_id": 1761789917538
+                    }
+                  ]
+                }
+              ],
+              "Cost": 30
+            }
+          ]
+        },
+        {
+          "Id": "T5_6902c81b30ea65582a59968b",
+          "Name": "Administer Calcium Channel Blockers (CCB)",
+          "Definition": "CCBs prevent calcium from entering heart and blood vessel muscle cells. This relaxes vessels and reduces heart workload. This tactic includes three possible actions: stopping the drug, maintaining the current dosage, or increasing the dosage.  It has a metric to track the maximum number of doses a patient can be prescribed. This tactic adds side effects to the application of the drugs.",
+          "Preconditions": [],
+          "Rules": [],
+          "Metrics": [
+            {
+              "Id": "6902c8513b6d9d840a3b85ff",
+              "Variable": "CCB",
+              "Definition": "Number of dossage CCB",
+              "Type": "Integer",
+              "Range": [0, 2],
+              "NormalRange": [0, 2]
+            },
+            {
+              "Id": "6902c8523b6d9d840a3b8600",
+              "Variable": "SECCB",
+              "Definition": "Side Effects CCB",
+              "Type": "Boolean",
+              "Range": [0, 1],
+              "NormalRange": [0, 1]
+            }
+          ],
+          "Activities": [
+            {
+              "Id": "A1-6902c91d21fdf55cf0f6a89d",
+              "Name": "Stop_the_treatment_with_CCB",
+              "Preconditions": [
+                {
+                  "Id": "f0f6a89f",
+                  "Metric": "SECCB",
+                  "Equal": 1,
+                  "MetricType": "boolean"
+                },
+                {
+                  "Id": "f0f6a8a0",
+                  "Attribute": "N",
+                  "Greater-than": 0,
+                  "AttributeType": "integer"
+                },
+                {
+                  "Id": "f0f6a8a2",
+                  "Metric": "CCB",
+                  "Greater-than": 0,
+                  "MetricType": "integer"
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "0aa1613e",
+                  "Probability": 0.5,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "+",
+                      "value": 0,
+                      "_id": 1761790494264
+                    },
+                    {
+                      "idAttribute": "6902c8513b6d9d840a3b85ff",
+                      "operator": "=",
+                      "value": 0,
+                      "_id": 1761790495122
+                    }
+                  ]
+                },
+                {
+                  "Id": "0a3b8605",
+                  "Probability": 0.5,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "+",
+                      "value": 3,
+                      "_id": 1761790518821
+                    },
+                    {
+                      "idAttribute": "6902c8513b6d9d840a3b85ff",
+                      "operator": "=",
+                      "value": 0,
+                      "_id": 1761790519682
+                    }
+                  ]
+                }
+              ],
+              "Cost": 0
+            },
+            {
+              "Id": "A2-6902d0142fe2942e824056a8",
+              "Name": "Increase_dosage_of_CCB",
+              "Preconditions": [
+                {
+                  "Id": "824056a9",
+                  "Attribute": "SBP",
+                  "Greater-than": 130,
+                  "AttributeType": "integer"
+                },
+                {
+                  "Id": "e23d3c0c",
+                  "Attribute": "N",
+                  "Less-than": 8,
+                  "AttributeType": "integer"
+                },
+                {
+                  "Id": "50f7b91d",
+                  "Metric": "CCB",
+                  "Less-than": 2,
+                  "MetricType": "integer"
+                },
+                {
+                  "Id": "824056ab",
+                  "Metric": "SECCB",
+                  "Equal": 0,
+                  "MetricType": "boolean"
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "3a08379f",
+                  "Probability": 0.5,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "-",
+                      "value": 6,
+                      "_id": 1761792174836
+                    },
+                    {
+                      "idAttribute": "6902c8513b6d9d840a3b85ff",
+                      "operator": "+",
+                      "value": 1,
+                      "_id": 1761792186483
+                    }
+                  ]
+                },
+                {
+                  "Id": "e23d3c0e",
+                  "Probability": 0.48,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "-",
+                      "value": 3,
+                      "_id": 1761792197406
+                    },
+                    {
+                      "idAttribute": "6902c8513b6d9d840a3b85ff",
+                      "operator": "+",
+                      "value": 1,
+                      "_id": 1761792214814
+                    }
+                  ]
+                },
+                {
+                  "Id": "e23d3c10",
+                  "Probability": 0.02,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "-",
+                      "value": 1,
+                      "_id": 1761792250650
+                    },
+                    {
+                      "idAttribute": "6902c8513b6d9d840a3b85ff",
+                      "operator": "+",
+                      "value": 1,
+                      "_id": 1761792252644
+                    },
+                    {
+                      "idAttribute": "6902c8523b6d9d840a3b8600",
+                      "operator": "=",
+                      "value": 1,
+                      "_id": 1761792254507
+                    }
+                  ]
+                }
+              ],
+              "Cost": 30
+            },
+            {
+              "Id": "A3-6902ca602009c2becfa41179",
+              "Name": "Keep_the_current_dosage_of_CCB",
+              "Preconditions": [
+                {
+                  "Id": "05608f7c",
+                  "Attribute": "SBP",
+                  "Greater-than": 120,
+                  "AttributeType": "integer"
+                },
+                {
+                  "Id": "fd9e50d8",
+                  "Attribute": "SBP",
+                  "Less-than": 130,
+                  "AttributeType": "integer"
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "93320cab",
+                  "Probability": 0.6,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "+",
+                      "value": 0,
+                      "_id": 1761791966378
+                    }
+                  ]
+                },
+                {
+                  "Id": "146eddd0",
+                  "Probability": 0.4,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "+",
+                      "value": 3,
+                      "_id": 1761791991726
+                    }
+                  ]
+                }
+              ],
+              "Cost": 0
+            }
+          ]
+        },
+        {
+          "Id": "T6_6902d15faffca28fb2d44ec1",
+          "Name": "Administer Thiazide Diuretic (TD)",
+          "Definition": "Thiazides help the kidneys eliminate sodium and water, reducing blood volume and lowering blood pressure. This tactic includes three possible actions: stopping the drug, maintaining the current dosage, or increasing the dosage.  It has a metric to track the maximum number of doses a patient can be prescribed.",
+          "Preconditions": [],
+          "Rules": [],
+          "Metrics": [
+            {
+              "Id": "6902d179f9ace130fd9e50dd",
+              "Variable": "TD",
+              "Definition": "Number of dosage of Thiazide Diuretic",
+              "Type": "Integer",
+              "Range": [0, 2],
+              "NormalRange": [0, 2]
+            },
+            {
+              "Id": "6902d17bf9ace130fd9e50de",
+              "Variable": "SETD",
+              "Definition": "Side Effects TD",
+              "Type": "Boolean",
+              "Range": [0, 1],
+              "NormalRange": [0, 1]
+            }
+          ],
+          "Activities": [
+            {
+              "Id": "A1-6902d1eff9ace130fd9e50e3",
+              "Name": "Stop_the_treatment_with_Thiazide_Diuretic_TD",
+              "Preconditions": [
+                {
+                  "Id": "40fa01d4",
+                  "Metric": "SETD",
+                  "Equal": 1,
+                  "MetricType": "boolean"
+                },
+                {
+                  "Id": "2e277295",
+                  "Attribute": "N",
+                  "Greater-than": 0,
+                  "AttributeType": "integer"
+                },
+                {
+                  "Id": "fd9e50e5",
+                  "Metric": "TD",
+                  "Greater-than": 0,
+                  "MetricType": "integer"
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "05608f7e",
+                  "Probability": 0.5,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "+",
+                      "value": 0,
+                      "_id": 1761792694150
+                    },
+                    {
+                      "idAttribute": "6902d179f9ace130fd9e50dd",
+                      "operator": "=",
+                      "value": 0,
+                      "_id": 1761792695138
+                    }
+                  ]
+                },
+                {
+                  "Id": "b2d44ec3",
+                  "Probability": 0.5,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "+",
+                      "value": 3,
+                      "_id": 1761792737038
+                    },
+                    {
+                      "idAttribute": "6902d179f9ace130fd9e50dd",
+                      "operator": "=",
+                      "value": 0,
+                      "_id": 1761792760780
+                    }
+                  ]
+                }
+              ],
+              "Cost": 0
+            },
+            {
+              "Id": "A2-6902d3227d40ea087b8b9739",
+              "Name": "Keep_the_current_dosage_of_TD",
+              "Preconditions": [
+                {
+                  "Id": "1f4c731e",
+                  "Attribute": "SBP",
+                  "Greater-than": 120,
+                  "AttributeType": "integer"
+                },
+                {
+                  "Id": "acf7b58d",
+                  "Attribute": "SBP",
+                  "Less-than": 130,
+                  "AttributeType": "integer"
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "9c847ebf",
+                  "Probability": 0.85,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "+",
+                      "value": 0,
+                      "_id": 1761792893976
+                    }
+                  ]
+                },
+                {
+                  "Id": "acf7b58f",
+                  "Probability": 0.15,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "+",
+                      "value": 3,
+                      "_id": 1761792923152
+                    }
+                  ]
+                }
+              ],
+              "Cost": 0
+            },
+            {
+              "Id": "A3-6902d3b156676d434739f253",
+              "Name": "Increase_dosage_of_TD",
+              "Preconditions": [
+                {
+                  "Id": "8e0abd54",
+                  "Attribute": "SBP",
+                  "Greater-than": 130,
+                  "AttributeType": "integer"
+                },
+                {
+                  "Id": "b2d44ec5",
+                  "Attribute": "N",
+                  "Less-than": 8,
+                  "AttributeType": "integer"
+                },
+                {
+                  "Id": "8e0abd56",
+                  "Metric": "TD",
+                  "Less-than": 2,
+                  "MetricType": "integer"
+                },
+                {
+                  "Id": "75a47e6f",
+                  "Metric": "SETD",
+                  "Equal": 0,
+                  "MetricType": "boolean"
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "8e0abd58",
+                  "Probability": 0.5,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "-",
+                      "value": 6,
+                      "_id": 1761793097151
+                    },
+                    {
+                      "idAttribute": "6902d179f9ace130fd9e50dd",
+                      "operator": "+",
+                      "value": 1,
+                      "_id": 1761793101051
+                    }
+                  ]
+                },
+                {
+                  "Id": "8e0abd5a",
+                  "Probability": 0.4,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "-",
+                      "value": 3,
+                      "_id": 1761793134968
+                    },
+                    {
+                      "idAttribute": "690231d9fa49d8e8defd5b01",
+                      "operator": "+",
+                      "value": 1,
+                      "_id": 1761793137970
+                    }
+                  ]
+                },
+                {
+                  "Id": "8e0abd5c",
+                  "Probability": 0.1,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "-",
+                      "value": 1,
+                      "_id": 1761793168874
+                    },
+                    {
+                      "idAttribute": "690231d9fa49d8e8defd5b01",
+                      "operator": "+",
+                      "value": 1,
+                      "_id": 1761793173932
+                    },
+                    {
+                      "idAttribute": "6902d17bf9ace130fd9e50de",
+                      "operator": "=",
+                      "value": 1,
+                      "_id": 1761793178669
+                    }
+                  ]
+                }
+              ],
+              "Cost": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "G2",
+      "Attribute_reference": "SBP",
+      "Range": [90, 120],
+      "Tactics": [
+        {
+          "Id": "T1_69028433b3ee2daa2b880621",
+          "Name": "Change Lifestyle Habits",
+          "Definition": "Change Lifestyle Habits involves weight loss, reduced sodium intake, physical activity, limiting alcohol consumption, and diet.",
+          "Preconditions": [],
+          "Rules": [],
+          "Metrics": [],
+          "Activities": [
+            {
+              "Id": "A1-690284d6a60b03443683bea8",
+              "Name": "Reduce_sodium_intake",
+              "Preconditions": [
+                {
+                  "Id": "3a3a46b3",
+                  "Attribute": "SBP",
+                  "Greater-than-or-equal": 124,
+                  "AttributeType": "integer"
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "ba80baee",
+                  "Probability": 0.5,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "-",
+                      "value": 3,
+                      "_id": 1761772998676
+                    }
+                  ]
+                },
+                {
+                  "Id": "ee0f5ddb",
+                  "Probability": 0.4,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "-",
+                      "value": 2,
+                      "_id": 1761773021377
+                    }
+                  ]
+                },
+                {
+                  "Id": "ec6ccde2",
+                  "Probability": 0.1,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "-",
+                      "value": 1,
+                      "_id": 1761773044265
+                    }
+                  ]
+                }
+              ],
+              "Cost": 0
+            },
+            {
+              "Id": "A2-6902860ebac13bf301d228b4",
+              "Name": "Increase_fruit_and_vegetables_consumption",
+              "Preconditions": [
+                {
+                  "Id": "01d228b5",
+                  "Attribute": "SBP",
+                  "Less-than-or-equal": 126,
+                  "AttributeType": "integer"
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "01d228b7",
+                  "Probability": 0.7,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "-",
+                      "value": 6,
+                      "_id": 1761773264333
+                    }
+                  ]
+                },
+                {
+                  "Id": "01d228b9",
+                  "Probability": 0.2,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "-",
+                      "value": 4,
+                      "_id": 1761773280217
+                    }
+                  ]
+                },
+                {
+                  "Id": "ba80baf0",
+                  "Probability": 0.1,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d9fa49d8e8defd5b01",
+                      "operator": "-",
+                      "value": 1,
+                      "_id": 1761773299396
+                    }
+                  ]
+                }
+              ],
+              "Cost": 5
+            }
+          ]
+        },
+        {
+          "Id": "T2_69028753bac13bf301d228ba",
+          "Name": "Administer Beta-blocker (BB)",
+          "Definition": "Beta-blockers reduce heart rate and the force of contraction by blocking the effects of adrenaline (epinephrine) on beta-adrenergic receptors. This tactic includes three possible actions: stopping the drug, maintaining the current dosage, or increasing the dosage. It has a metric to track the maximum number of doses a patient can be prescribed. This tactic adds side effects to the application of the drugs.",
+          "Preconditions": [],
+          "Rules": [],
+          "Metrics": [
+            {
+              "Id": "6902877c12d92b0cee0f5ddd",
+              "Variable": "BB",
+              "Definition": "Number of dosage BB",
+              "Type": "Integer",
+              "Range": [0, 2],
+              "NormalRange": [0, 2]
+            },
+            {
+              "Id": "6902877e12d92b0cee0f5dde",
+              "Variable": "SEBB",
+              "Definition": "Side effects BB",
+              "Type": "Boolean",
+              "Range": [0, 1],
+              "NormalRange": [0, 1]
+            }
+          ],
+          "Activities": [
+            {
+              "Id": "A1-690288d712d92b0cee0f5de0",
+              "Name": "Stop_the_treatment_with_BB",
+              "Preconditions": [
+                {
+                  "Id": "43ae9d09",
+                  "Metric": "BB",
+                  "Greater-than": 0,
+                  "MetricType": "integer"
+                },
+                {
+                  "Id": "258b7b82",
+                  "Attribute": "N",
+                  "Greater-than": 0,
+                  "AttributeType": "integer"
+                },
+                {
+                  "Id": "258b7b84",
+                  "Metric": "SEBB",
+                  "Equal": 1,
+                  "MetricType": "boolean"
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "0c03f56e",
+                  "Probability": 0.2,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "+",
+                      "value": 0,
+                      "_id": 1761774187365
+                    },
+                    {
+                      "idAttribute": "6902877c12d92b0cee0f5ddd",
+                      "operator": "=",
+                      "value": 0,
+                      "_id": 1761774219672
+                    }
+                  ]
+                },
+                {
+                  "Id": "0c03f570",
+                  "Probability": 0.8,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "+",
+                      "value": 3,
+                      "_id": 1761774251232
+                    },
+                    {
+                      "idAttribute": "6902877c12d92b0cee0f5ddd",
+                      "operator": "=",
+                      "value": 0,
+                      "_id": 1761774252155
+                    }
+                  ]
+                }
+              ],
+              "Cost": 0
+            },
+            {
+              "Id": "A2-69028c67280668c9ba80baf2",
+              "Name": "Keep_the_current_dosage_of_BB",
+              "Preconditions": [
+                {
+                  "Id": "b782e25b",
+                  "Attribute": "SBP",
+                  "Greater-than": 120,
+                  "AttributeType": "integer"
+                },
+                {
+                  "Id": "6e4b924f",
+                  "Attribute": "SBP",
+                  "Less-than": 130,
+                  "AttributeType": "integer"
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "c4e4e91f",
+                  "Probability": 0.7,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "+",
+                      "value": 0,
+                      "_id": 1761775052058
+                    }
+                  ]
+                },
+                {
+                  "Id": "4dbd1a18",
+                  "Probability": 0.3,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "+",
+                      "value": 3,
+                      "_id": 1761775089448
+                    }
+                  ]
+                }
+              ],
+              "Cost": 0
+            },
+            {
+              "Id": "A3-690293be63c5e3414afd3886",
+              "Name": "Increase_dosage_of_BB",
+              "Preconditions": [
+                {
+                  "Id": "0cf23233",
+                  "Attribute": "SBP",
+                  "Greater-than": 130,
+                  "AttributeType": "integer"
+                },
+                {
+                  "Id": "0bc807b2",
+                  "Attribute": "N",
+                  "Less-than": 8,
+                  "AttributeType": "integer"
+                },
+                {
+                  "Id": "0bc807b4",
+                  "Metric": "BB",
+                  "Less-than": 2,
+                  "MetricType": "integer"
+                },
+                {
+                  "Id": "0cf23235",
+                  "Metric": "SEBB",
+                  "Equal": 0,
+                  "MetricType": "boolean"
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "2cce9c0f",
+                  "Probability": 0.65,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "-",
+                      "value": 7,
+                      "_id": 1761777065063
+                    },
+                    {
+                      "idAttribute": "6902877c12d92b0cee0f5ddd",
+                      "operator": "+",
+                      "value": 1,
+                      "_id": 1761777074282
+                    }
+                  ]
+                },
+                {
+                  "Id": "fc0c449d",
+                  "Probability": 0.29,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "-",
+                      "value": 3,
+                      "_id": 1761777100578
+                    },
+                    {
+                      "idAttribute": "6902877c12d92b0cee0f5ddd",
+                      "operator": "+",
+                      "value": 1,
+                      "_id": 1761777107639
+                    }
+                  ]
+                },
+                {
+                  "Id": "b0f3bc9d",
+                  "Probability": 0.06,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "-",
+                      "value": 1,
+                      "_id": 1761777128006
+                    },
+                    {
+                      "idAttribute": "6902877c12d92b0cee0f5ddd",
+                      "operator": "+",
+                      "value": 1,
+                      "_id": 1761777144317
+                    },
+                    {
+                      "idAttribute": "6902877e12d92b0cee0f5dde",
+                      "operator": "=",
+                      "value": 1,
+                      "_id": 1761777155171
+                    }
+                  ]
+                }
+              ],
+              "Cost": 20
+            }
+          ]
+        },
+        {
+          "Id": "T3_690296dadd37e322ba39b40d",
+          "Name": "Administer angiotensin converting enzyme inhibitor (ACE) ",
+          "Definition": "ACE inhibitors block the enzyme that converts angiotensin I to angiotensin II, a hormone that narrows blood vessels. This causes vasodilation and reduces blood pressure. This tactic includes three possible actions: stopping the drug, maintaining the current dosage, or increasing the dosage. It has a metric to track the maximum number of doses a patient can be prescribed. This tactic adds side effects to the application of the drugs.",
+          "Preconditions": [],
+          "Rules": [],
+          "Metrics": [
+            {
+              "Id": "690296fb2e108cf4728be9b8",
+              "Variable": "ACE",
+              "Definition": "Number of dosage ACE",
+              "Type": "Integer",
+              "Range": [0, 2],
+              "NormalRange": [0, 2]
+            },
+            {
+              "Id": "69029764f2224227fc0c44a0",
+              "Variable": "SEACE",
+              "Definition": "Side Effects of ACE",
+              "Type": "Boolean",
+              "Range": [0, 1],
+              "NormalRange": [0, 1]
+            }
+          ],
+          "Activities": [
+            {
+              "Id": "A1-69029e9659c8f3078572c960",
+              "Name": "Keep_current_dosage_of_ACE",
+              "Preconditions": [
+                {
+                  "Id": "a5e7a1c0",
+                  "Attribute": "SBP",
+                  "Greater-than": 120,
+                  "AttributeType": "integer"
+                },
+                {
+                  "Id": "a5e7a1c1",
+                  "Attribute": "SBP",
+                  "Less-than": 130,
+                  "AttributeType": "integer"
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "8572c962",
+                  "Probability": 0.8,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "+",
+                      "value": 0,
+                      "_id": 1761787873278
+                    }
+                  ]
+                },
+                {
+                  "Id": "8572c964",
+                  "Probability": 0.2,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "+",
+                      "value": 3,
+                      "_id": 1761787890284
+                    }
+                  ]
+                }
+              ],
+              "Cost": 0
+            },
+            {
+              "Id": "A2-69029ac359c8f3078572c958",
+              "Name": "Stop_the_treatment_with_ACE",
+              "Preconditions": [
+                {
+                  "Id": "8e1f909b",
+                  "Metric": "SEACE",
+                  "Equal": 1,
+                  "MetricType": "boolean"
+                },
+                {
+                  "Id": "8e1f909c",
+                  "Attribute": "N",
+                  "Greater-than": 0,
+                  "AttributeType": "integer"
+                },
+                {
+                  "Id": "8e1f909e",
+                  "Metric": "ACE",
+                  "Greater-than": 0,
+                  "MetricType": "integer"
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "8572c95a",
+                  "Probability": 0.5,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "+",
+                      "value": 0,
+                      "_id": 1761780587856
+                    },
+                    {
+                      "idAttribute": "690296fb2e108cf4728be9b8",
+                      "operator": "=",
+                      "value": 0,
+                      "_id": 1761787662132
+                    }
+                  ]
+                },
+                {
+                  "Id": "8572c95c",
+                  "Probability": 0.5,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "+",
+                      "value": 3,
+                      "_id": 1761787677626
+                    },
+                    {
+                      "idAttribute": "690296fb2e108cf4728be9b8",
+                      "operator": "=",
+                      "value": 0,
+                      "_id": 1761787709399
+                    }
+                  ]
+                }
+              ],
+              "Cost": 0
+            },
+            {
+              "Id": "A3-69029eb859c8f3078572c966",
+              "Name": "Increase_dosage_of_ACE",
+              "Preconditions": [
+                {
+                  "Id": "e5ad6f21",
+                  "Attribute": "SBP",
+                  "Greater-than": 130,
+                  "AttributeType": "integer"
+                },
+                {
+                  "Id": "a426f70c",
+                  "Attribute": "N",
+                  "Less-than": 8,
+                  "AttributeType": "integer"
+                },
+                {
+                  "Id": "a426f70e",
+                  "Metric": "ACE",
+                  "Less-than": 2,
+                  "MetricType": "integer"
+                },
+                {
+                  "Id": "a426f710",
+                  "Metric": "SEACE",
+                  "Equal": 0,
+                  "MetricType": "boolean"
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "8572c969",
+                  "Probability": 0.6,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "-",
+                      "value": 6,
+                      "_id": 1761788236529
+                    },
+                    {
+                      "idAttribute": "690296fb2e108cf4728be9b8",
+                      "operator": "+",
+                      "value": 1,
+                      "_id": 1761788248013
+                    }
+                  ]
+                },
+                {
+                  "Id": "a5e7a1c3",
+                  "Probability": 0.36,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "-",
+                      "value": 3,
+                      "_id": 1761788259237
+                    },
+                    {
+                      "idAttribute": "690296fb2e108cf4728be9b8",
+                      "operator": "+",
+                      "value": 1,
+                      "_id": 1761788270121
+                    }
+                  ]
+                },
+                {
+                  "Id": "a5e7a1c5",
+                  "Probability": 0.04,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "-",
+                      "value": 1,
+                      "_id": 1761788286643
+                    },
+                    {
+                      "idAttribute": "690296fb2e108cf4728be9b8",
+                      "operator": "+",
+                      "value": 1,
+                      "_id": 1761788292364
+                    },
+                    {
+                      "idAttribute": "69029764f2224227fc0c44a0",
+                      "operator": "=",
+                      "value": 0,
+                      "_id": 1761788295938
+                    }
+                  ]
+                }
+              ],
+              "Cost": 18
+            }
+          ]
+        },
+        {
+          "Id": "T4_6902c26aec879862e504e24a",
+          "Name": "Administer Angiotensin Receptor Blockers (ARB)",
+          "Definition": "ARBs block angiotensin II receptors, preventing blood vessel constriction, similar to ACE inhibitors, but without the cough side effect. This tactic includes three possible actions: stopping the drug, maintaining the current dosage, or increasing the dosage.  It has a metric to track the maximum number of doses a patient can be prescribed. This tactic adds side effects to the application of the drugs.",
+          "Preconditions": [],
+          "Rules": [],
+          "Metrics": [
+            {
+              "Id": "6902c28fcaabf1ab2a01b6dc",
+              "Variable": "ARB",
+              "Definition": "Number of dosage ARB",
+              "Type": "Integer",
+              "Range": [0, 2],
+              "NormalRange": [0, 2]
+            },
+            {
+              "Id": "6902c291caabf1ab2a01b6dd",
+              "Variable": "SEARB",
+              "Definition": "Side Effects ARB",
+              "Type": "Boolean",
+              "Range": [0, 1],
+              "NormalRange": [0, 1]
+            }
+          ],
+          "Activities": [
+            {
+              "Id": "A1-6902c5b29a35e1bbdb91c498",
+              "Name": "Keep_the_current_dosage_of_ARB",
+              "Preconditions": [
+                {
+                  "Id": "db91c499",
+                  "Attribute": "SBP",
+                  "Greater-than": 120,
+                  "AttributeType": "integer"
+                },
+                {
+                  "Id": "db91c49a",
+                  "Attribute": "SBP",
+                  "Less-than": 130,
+                  "AttributeType": "integer"
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "b22b6331",
+                  "Probability": 0.6,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "+",
+                      "value": 0,
+                      "_id": 1761789474201
+                    }
+                  ]
+                },
+                {
+                  "Id": "316de9a0",
+                  "Probability": 0.4,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "+",
+                      "value": 3,
+                      "_id": 1761789515418
+                    }
+                  ]
+                }
+              ],
+              "Cost": 0
+            },
+            {
+              "Id": "A2-6902c3f8f92b4bed4ba97147",
+              "Name": "Stop_the_treatment_with_ARB",
+              "Preconditions": [
+                {
+                  "Id": "e504e24c",
+                  "Metric": "SEARB",
+                  "Equal": 1,
+                  "MetricType": "boolean"
+                },
+                {
+                  "Id": "3bf0afc4",
+                  "Attribute": "N",
+                  "Greater-than": 0,
+                  "AttributeType": "integer"
+                },
+                {
+                  "Id": "42b03cec",
+                  "Metric": "ARB",
+                  "Greater-than": 0,
+                  "MetricType": "integer"
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "4ba97149",
+                  "Probability": 0.5,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "+",
+                      "value": 0,
+                      "_id": 1761789207211
+                    },
+                    {
+                      "idAttribute": "6902c28fcaabf1ab2a01b6dc",
+                      "operator": "=",
+                      "value": 0,
+                      "_id": 1761789209392
+                    }
+                  ]
+                },
+                {
+                  "Id": "d1190782",
+                  "Probability": 0.5,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "+",
+                      "value": 3,
+                      "_id": 1761789289482
+                    },
+                    {
+                      "idAttribute": "6902c28fcaabf1ab2a01b6dc",
+                      "operator": "=",
+                      "value": 0,
+                      "_id": 1761789290696
+                    }
+                  ]
+                }
+              ],
+              "Cost": 0
+            },
+            {
+              "Id": "A3-6902c691378e21f7cc6a76e1",
+              "Name": "Step_without_a_description",
+              "Preconditions": [
+                {
+                  "Id": "316de9a2",
+                  "Attribute": "SBP",
+                  "Greater-than": 130,
+                  "AttributeType": "integer"
+                },
+                {
+                  "Id": "4ba9714a",
+                  "Attribute": "N",
+                  "Less-than": 8,
+                  "AttributeType": "integer"
+                },
+                {
+                  "Id": "cc6a76e3",
+                  "Metric": "ARB",
+                  "Less-than": 2,
+                  "MetricType": "integer"
+                },
+                {
+                  "Id": "e504e24f",
+                  "Metric": "SEARB",
+                  "Equal": 0,
+                  "MetricType": "boolean"
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "e504e251",
+                  "Probability": 0.4,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "-",
+                      "value": 6,
+                      "_id": 1761789810650
+                    },
+                    {
+                      "idAttribute": "6902c28fcaabf1ab2a01b6dc",
+                      "operator": "+",
+                      "value": 1,
+                      "_id": 1761789835851
+                    }
+                  ]
+                },
+                {
+                  "Id": "cc6a76e5",
+                  "Probability": 0.49,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "-",
+                      "value": 3,
+                      "_id": 1761789880054
+                    },
+                    {
+                      "idAttribute": "6902c28fcaabf1ab2a01b6dc",
+                      "operator": "+",
+                      "value": 1,
+                      "_id": 1761789881279
+                    }
+                  ]
+                },
+                {
+                  "Id": "cc6a76e7",
+                  "Probability": 0.11,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "-",
+                      "value": 1,
+                      "_id": 1761789912320
+                    },
+                    {
+                      "idAttribute": "6902c28fcaabf1ab2a01b6dc",
+                      "operator": "+",
+                      "value": 1,
+                      "_id": 1761789915459
+                    },
+                    {
+                      "idAttribute": "6902c291caabf1ab2a01b6dd",
+                      "operator": "=",
+                      "value": 1,
+                      "_id": 1761789917538
+                    }
+                  ]
+                }
+              ],
+              "Cost": 30
+            }
+          ]
+        },
+        {
+          "Id": "T5_6902c81b30ea65582a59968b",
+          "Name": "Administer Calcium Channel Blockers (CCB)",
+          "Definition": "CCBs prevent calcium from entering heart and blood vessel muscle cells. This relaxes vessels and reduces heart workload. This tactic includes three possible actions: stopping the drug, maintaining the current dosage, or increasing the dosage.  It has a metric to track the maximum number of doses a patient can be prescribed. This tactic adds side effects to the application of the drugs.",
+          "Preconditions": [],
+          "Rules": [],
+          "Metrics": [
+            {
+              "Id": "6902c8513b6d9d840a3b85ff",
+              "Variable": "CCB",
+              "Definition": "Number of dossage CCB",
+              "Type": "Integer",
+              "Range": [0, 2],
+              "NormalRange": [0, 2]
+            },
+            {
+              "Id": "6902c8523b6d9d840a3b8600",
+              "Variable": "SECCB",
+              "Definition": "Side Effects CCB",
+              "Type": "Boolean",
+              "Range": [0, 1],
+              "NormalRange": [0, 1]
+            }
+          ],
+          "Activities": [
+            {
+              "Id": "A1-6902c91d21fdf55cf0f6a89d",
+              "Name": "Stop_the_treatment_with_CCB",
+              "Preconditions": [
+                {
+                  "Id": "f0f6a89f",
+                  "Metric": "SECCB",
+                  "Equal": 1,
+                  "MetricType": "boolean"
+                },
+                {
+                  "Id": "f0f6a8a0",
+                  "Attribute": "N",
+                  "Greater-than": 0,
+                  "AttributeType": "integer"
+                },
+                {
+                  "Id": "f0f6a8a2",
+                  "Metric": "CCB",
+                  "Greater-than": 0,
+                  "MetricType": "integer"
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "0aa1613e",
+                  "Probability": 0.5,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "+",
+                      "value": 0,
+                      "_id": 1761790494264
+                    },
+                    {
+                      "idAttribute": "6902c8513b6d9d840a3b85ff",
+                      "operator": "=",
+                      "value": 0,
+                      "_id": 1761790495122
+                    }
+                  ]
+                },
+                {
+                  "Id": "0a3b8605",
+                  "Probability": 0.5,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "+",
+                      "value": 3,
+                      "_id": 1761790518821
+                    },
+                    {
+                      "idAttribute": "6902c8513b6d9d840a3b85ff",
+                      "operator": "=",
+                      "value": 0,
+                      "_id": 1761790519682
+                    }
+                  ]
+                }
+              ],
+              "Cost": 0
+            },
+            {
+              "Id": "A2-6902d0142fe2942e824056a8",
+              "Name": "Increase_dosage_of_CCB",
+              "Preconditions": [
+                {
+                  "Id": "824056a9",
+                  "Attribute": "SBP",
+                  "Greater-than": 130,
+                  "AttributeType": "integer"
+                },
+                {
+                  "Id": "e23d3c0c",
+                  "Attribute": "N",
+                  "Less-than": 8,
+                  "AttributeType": "integer"
+                },
+                {
+                  "Id": "50f7b91d",
+                  "Metric": "CCB",
+                  "Less-than": 2,
+                  "MetricType": "integer"
+                },
+                {
+                  "Id": "824056ab",
+                  "Metric": "SECCB",
+                  "Equal": 0,
+                  "MetricType": "boolean"
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "3a08379f",
+                  "Probability": 0.5,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "-",
+                      "value": 6,
+                      "_id": 1761792174836
+                    },
+                    {
+                      "idAttribute": "6902c8513b6d9d840a3b85ff",
+                      "operator": "+",
+                      "value": 1,
+                      "_id": 1761792186483
+                    }
+                  ]
+                },
+                {
+                  "Id": "e23d3c0e",
+                  "Probability": 0.48,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "-",
+                      "value": 3,
+                      "_id": 1761792197406
+                    },
+                    {
+                      "idAttribute": "6902c8513b6d9d840a3b85ff",
+                      "operator": "+",
+                      "value": 1,
+                      "_id": 1761792214814
+                    }
+                  ]
+                },
+                {
+                  "Id": "e23d3c10",
+                  "Probability": 0.02,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "-",
+                      "value": 1,
+                      "_id": 1761792250650
+                    },
+                    {
+                      "idAttribute": "6902c8513b6d9d840a3b85ff",
+                      "operator": "+",
+                      "value": 1,
+                      "_id": 1761792252644
+                    },
+                    {
+                      "idAttribute": "6902c8523b6d9d840a3b8600",
+                      "operator": "=",
+                      "value": 1,
+                      "_id": 1761792254507
+                    }
+                  ]
+                }
+              ],
+              "Cost": 30
+            },
+            {
+              "Id": "A3-6902ca602009c2becfa41179",
+              "Name": "Keep_the_current_dosage_of_CCB",
+              "Preconditions": [
+                {
+                  "Id": "05608f7c",
+                  "Attribute": "SBP",
+                  "Greater-than": 120,
+                  "AttributeType": "integer"
+                },
+                {
+                  "Id": "fd9e50d8",
+                  "Attribute": "SBP",
+                  "Less-than": 130,
+                  "AttributeType": "integer"
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "93320cab",
+                  "Probability": 0.6,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "+",
+                      "value": 0,
+                      "_id": 1761791966378
+                    }
+                  ]
+                },
+                {
+                  "Id": "146eddd0",
+                  "Probability": 0.4,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "+",
+                      "value": 3,
+                      "_id": 1761791991726
+                    }
+                  ]
+                }
+              ],
+              "Cost": 0
+            }
+          ]
+        },
+        {
+          "Id": "T6_6902d15faffca28fb2d44ec1",
+          "Name": "Administer Thiazide Diuretic (TD)",
+          "Definition": "Thiazides help the kidneys eliminate sodium and water, reducing blood volume and lowering blood pressure. This tactic includes three possible actions: stopping the drug, maintaining the current dosage, or increasing the dosage.  It has a metric to track the maximum number of doses a patient can be prescribed.",
+          "Preconditions": [],
+          "Rules": [],
+          "Metrics": [
+            {
+              "Id": "6902d179f9ace130fd9e50dd",
+              "Variable": "TD",
+              "Definition": "Number of dosage of Thiazide Diuretic",
+              "Type": "Integer",
+              "Range": [0, 2],
+              "NormalRange": [0, 2]
+            },
+            {
+              "Id": "6902d17bf9ace130fd9e50de",
+              "Variable": "SETD",
+              "Definition": "Side Effects TD",
+              "Type": "Boolean",
+              "Range": [0, 1],
+              "NormalRange": [0, 1]
+            }
+          ],
+          "Activities": [
+            {
+              "Id": "A1-6902d1eff9ace130fd9e50e3",
+              "Name": "Stop_the_treatment_with_Thiazide_Diuretic_TD",
+              "Preconditions": [
+                {
+                  "Id": "40fa01d4",
+                  "Metric": "SETD",
+                  "Equal": 1,
+                  "MetricType": "boolean"
+                },
+                {
+                  "Id": "2e277295",
+                  "Attribute": "N",
+                  "Greater-than": 0,
+                  "AttributeType": "integer"
+                },
+                {
+                  "Id": "fd9e50e5",
+                  "Metric": "TD",
+                  "Greater-than": 0,
+                  "MetricType": "integer"
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "05608f7e",
+                  "Probability": 0.5,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "+",
+                      "value": 0,
+                      "_id": 1761792694150
+                    },
+                    {
+                      "idAttribute": "6902d179f9ace130fd9e50dd",
+                      "operator": "=",
+                      "value": 0,
+                      "_id": 1761792695138
+                    }
+                  ]
+                },
+                {
+                  "Id": "b2d44ec3",
+                  "Probability": 0.5,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "+",
+                      "value": 3,
+                      "_id": 1761792737038
+                    },
+                    {
+                      "idAttribute": "6902d179f9ace130fd9e50dd",
+                      "operator": "=",
+                      "value": 0,
+                      "_id": 1761792760780
+                    }
+                  ]
+                }
+              ],
+              "Cost": 0
+            },
+            {
+              "Id": "A2-6902d3227d40ea087b8b9739",
+              "Name": "Keep_the_current_dosage_of_TD",
+              "Preconditions": [
+                {
+                  "Id": "1f4c731e",
+                  "Attribute": "SBP",
+                  "Greater-than": 120,
+                  "AttributeType": "integer"
+                },
+                {
+                  "Id": "acf7b58d",
+                  "Attribute": "SBP",
+                  "Less-than": 130,
+                  "AttributeType": "integer"
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "9c847ebf",
+                  "Probability": 0.85,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "+",
+                      "value": 0,
+                      "_id": 1761792893976
+                    }
+                  ]
+                },
+                {
+                  "Id": "acf7b58f",
+                  "Probability": 0.15,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "+",
+                      "value": 3,
+                      "_id": 1761792923152
+                    }
+                  ]
+                }
+              ],
+              "Cost": 0
+            },
+            {
+              "Id": "A3-6902d3b156676d434739f253",
+              "Name": "Increase_dosage_of_TD",
+              "Preconditions": [
+                {
+                  "Id": "8e0abd54",
+                  "Attribute": "SBP",
+                  "Greater-than": 130,
+                  "AttributeType": "integer"
+                },
+                {
+                  "Id": "b2d44ec5",
+                  "Attribute": "N",
+                  "Less-than": 8,
+                  "AttributeType": "integer"
+                },
+                {
+                  "Id": "8e0abd56",
+                  "Metric": "TD",
+                  "Less-than": 2,
+                  "MetricType": "integer"
+                },
+                {
+                  "Id": "75a47e6f",
+                  "Metric": "SETD",
+                  "Equal": 0,
+                  "MetricType": "boolean"
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "8e0abd58",
+                  "Probability": 0.5,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "-",
+                      "value": 6,
+                      "_id": 1761793097151
+                    },
+                    {
+                      "idAttribute": "6902d179f9ace130fd9e50dd",
+                      "operator": "+",
+                      "value": 1,
+                      "_id": 1761793101051
+                    }
+                  ]
+                },
+                {
+                  "Id": "8e0abd5a",
+                  "Probability": 0.4,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "-",
+                      "value": 3,
+                      "_id": 1761793134968
+                    },
+                    {
+                      "idAttribute": "690231d9fa49d8e8defd5b01",
+                      "operator": "+",
+                      "value": 1,
+                      "_id": 1761793137970
+                    }
+                  ]
+                },
+                {
+                  "Id": "8e0abd5c",
+                  "Probability": 0.1,
+                  "Response": [
+                    {
+                      "idAttribute": "690231d7fa49d8e8defd5b00",
+                      "operator": "-",
+                      "value": 1,
+                      "_id": 1761793168874
+                    },
+                    {
+                      "idAttribute": "690231d9fa49d8e8defd5b01",
+                      "operator": "+",
+                      "value": 1,
+                      "_id": 1761793173932
+                    },
+                    {
+                      "idAttribute": "6902d17bf9ace130fd9e50de",
+                      "operator": "=",
+                      "value": 1,
+                      "_id": 1761793178669
+                    }
+                  ]
+                }
+              ],
+              "Cost": 0
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "Criterion": {
+    "TypeFunction": "Min",
+    "Reward": "Monetary Cost"
+  },
+  "Events": [
+    {
+      "Id": "E-033cb8bb",
+      "Preconditions": [
+        {
+          "Id": "2e39f5ed",
+          "Attribute": "SBP",
+          "Metric": null,
+          "Greater-than": 120,
+          "AttributeType": "integer",
+          "MetricType": null
+        },
+        {
+          "Id": "8164631f",
+          "Attribute": "SBP",
+          "Metric": null,
+          "Less-than": 130,
+          "AttributeType": "integer",
+          "MetricType": null
+        }
+      ],
+      "Effects": [
+        {
+          "Id": "81646321",
+          "Probability": 0.67,
+          "Response": [
+            {
+              "Id": "78389235",
+              "Attribute": "s",
+              "Metric": null,
+              "value": 1,
+              "operator": "="
+            }
+          ]
+        },
+        {
+          "Id": "22567b5c",
+          "Probability": 0.3,
+          "Response": [
+            {
+              "Id": "78401915",
+              "Attribute": "s",
+              "Metric": null,
+              "value": 2,
+              "operator": "="
+            }
+          ]
+        },
+        {
+          "Id": "22567b5e",
+          "Probability": 0.02,
+          "Response": [
+            {
+              "Id": "78413759",
+              "Attribute": "s",
+              "Metric": null,
+              "value": 3,
+              "operator": "="
+            }
+          ]
+        },
+        {
+          "Id": "22567b60",
+          "Probability": 0.01,
+          "Response": [
+            {
+              "Id": "78424189",
+              "Attribute": "s",
+              "Metric": null,
+              "value": 4,
+              "operator": "="
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "E-c95680ca",
+      "Preconditions": [
+        {
+          "Id": "f5867370",
+          "Attribute": "SBP",
+          "Metric": null,
+          "Greater-than": 130,
+          "AttributeType": "integer",
+          "MetricType": null
+        },
+        {
+          "Id": "028fd50c",
+          "Attribute": "SBP",
+          "Metric": null,
+          "Less-than": 140,
+          "AttributeType": "integer",
+          "MetricType": null
+        }
+      ],
+      "Effects": [
+        {
+          "Id": "028fd50e",
+          "Probability": 0.51,
+          "Response": [
+            {
+              "Id": "78666943",
+              "Attribute": "s",
+              "Metric": null,
+              "value": 1,
+              "operator": "="
+            }
+          ]
+        },
+        {
+          "Id": "f5867372",
+          "Probability": 0.4,
+          "Response": [
+            {
+              "Id": "78704606",
+              "Attribute": "s",
+              "Metric": null,
+              "value": 2,
+              "operator": "="
+            }
+          ]
+        },
+        {
+          "Id": "c95680cd",
+          "Probability": 0.05,
+          "Response": [
+            {
+              "Id": "78715862",
+              "Attribute": "s",
+              "Metric": null,
+              "value": 3,
+              "operator": "="
+            }
+          ]
+        },
+        {
+          "Id": "028fd510",
+          "Probability": 0.04,
+          "Response": [
+            {
+              "Id": "78726016",
+              "Attribute": "s",
+              "Metric": null,
+              "value": 4,
+              "operator": "="
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "E-6bb1a501",
+      "Preconditions": [
+        {
+          "Id": "6bb1a503",
+          "Attribute": "SBP",
+          "Metric": null,
+          "Greater-than": 140,
+          "AttributeType": "integer",
+          "MetricType": null
+        },
+        {
+          "Id": "6bb1a504",
+          "Attribute": "SBP",
+          "Metric": null,
+          "Less-than": 160,
+          "AttributeType": "integer",
+          "MetricType": null
+        }
+      ],
+      "Effects": [
+        {
+          "Id": "22567b62",
+          "Probability": 0.5,
+          "Response": [
+            {
+              "Id": "79028266",
+              "Attribute": "s",
+              "Metric": null,
+              "value": 2,
+              "operator": "="
+            }
+          ]
+        },
+        {
+          "Id": "6bb1a506",
+          "Probability": 0.3,
+          "Response": [
+            {
+              "Id": "79034974",
+              "Attribute": "s",
+              "Metric": null,
+              "value": 3,
+              "operator": "="
+            }
+          ]
+        },
+        {
+          "Id": "6bb1a508",
+          "Probability": 0.2,
+          "Response": [
+            {
+              "Id": "79045246",
+              "Attribute": "s",
+              "Metric": null,
+              "value": 4,
+              "operator": "="
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "E-aa6daae0",
+      "Preconditions": [
+        {
+          "Id": "81646322",
+          "Attribute": "s",
+          "Metric": null,
+          "Equal": 1,
+          "AttributeType": "integer",
+          "MetricType": null
+        }
+      ],
+      "Effects": [
+        {
+          "Id": "aa6daae3",
+          "Probability": 0.6,
+          "Response": [
+            {
+              "Id": "20316157",
+              "Attribute": "SBP",
+              "Metric": null,
+              "value": 0,
+              "operator": "+"
+            }
+          ]
+        },
+        {
+          "Id": "aa6daae5",
+          "Probability": 0.2,
+          "Response": [
+            {
+              "Id": "20340982",
+              "Attribute": "risk",
+              "Metric": null,
+              "value": 1,
+              "operator": "="
+            },
+            {
+              "Id": "20351794",
+              "Attribute": "SBP",
+              "Metric": null,
+              "value": 3,
+              "operator": "+"
+            },
+            {
+              "Id": "20375950",
+              "Attribute": "s",
+              "Metric": null,
+              "value": 2,
+              "operator": "="
+            }
+          ]
+        },
+        {
+          "Id": "aa6daae7",
+          "Probability": 0.2,
+          "Response": [
+            {
+              "Id": "20451059",
+              "Attribute": "s",
+              "Metric": null,
+              "value": 3,
+              "operator": "="
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "E-6ee0dd5e",
+      "Preconditions": [
+        {
+          "Id": "6ee0dd5f",
+          "Attribute": "s",
+          "Metric": null,
+          "Equal": 2,
+          "AttributeType": "integer",
+          "MetricType": null
+        }
+      ],
+      "Effects": [
+        {
+          "Id": "52c12eb6",
+          "Probability": 0.5,
+          "Response": [
+            {
+              "Id": "81062125",
+              "Attribute": "SBP",
+              "Metric": null,
+              "value": 6,
+              "operator": "+"
+            },
+            {
+              "Id": "81082733",
+              "Attribute": "risk",
+              "Metric": null,
+              "value": 1,
+              "operator": "="
+            },
+            {
+              "Id": "81122277",
+              "Attribute": "s",
+              "Metric": null,
+              "value": 3,
+              "operator": "="
+            }
+          ]
+        },
+        {
+          "Id": "2949b568",
+          "Probability": 0.5,
+          "Response": [
+            {
+              "Id": "81239907",
+              "Attribute": "s",
+              "Metric": null,
+              "value": 4,
+              "operator": "="
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "E-17980270",
+      "Preconditions": [
+        {
+          "Id": "17980272",
+          "Attribute": "s",
+          "Metric": null,
+          "Equal": 3,
+          "AttributeType": "integer",
+          "MetricType": null
+        }
+      ],
+      "Effects": [
+        {
+          "Id": "52c12eb8",
+          "Probability": 0.5,
+          "Response": [
+            {
+              "Id": "81553547",
+              "Attribute": "risk",
+              "Metric": null,
+              "value": 1,
+              "operator": "="
+            }
+          ]
+        },
+        {
+          "Id": "52c12eba",
+          "Probability": 0.5,
+          "Response": [
+            {
+              "Id": "21932757",
+              "Attribute": "s",
+              "Metric": null,
+              "value": 4,
+              "operator": "="
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "E-90e73f91",
+      "Preconditions": [
+        {
+          "Id": "52c12ebf",
+          "Attribute": "SBP",
+          "Metric": null,
+          "Greater-than": 120,
+          "AttributeType": "integer",
+          "MetricType": null
+        },
+        {
+          "Id": "52c12ec0",
+          "Attribute": "SBP",
+          "Metric": null,
+          "Less-than": 130,
+          "AttributeType": "integer",
+          "MetricType": null
+        },
+        {
+          "Id": "52c12ec1",
+          "Attribute": "risk",
+          "Metric": null,
+          "Equal": 1,
+          "AttributeType": "boolean",
+          "MetricType": null
+        }
+      ],
+      "Effects": [
+        {
+          "Id": "52c12ebc",
+          "Probability": 0.57,
+          "Response": [
+            {
+              "Id": "22217244",
+              "Attribute": "SBP",
+              "Metric": null,
+              "value": 0,
+              "operator": "+"
+            },
+            {
+              "Id": "22226081",
+              "Attribute": "s",
+              "Metric": null,
+              "value": 1,
+              "operator": "="
+            }
+          ]
+        },
+        {
+          "Id": "52c12ebe",
+          "Probability": 0.4,
+          "Response": [
+            {
+              "Id": "22247409",
+              "Attribute": "SBP",
+              "Metric": null,
+              "value": 5,
+              "operator": "+"
+            },
+            {
+              "Id": "22257200",
+              "Attribute": "s",
+              "Metric": null,
+              "value": 2,
+              "operator": "="
+            }
+          ]
+        },
+        {
+          "Id": "52c12ec3",
+          "Probability": 0.02,
+          "Response": [
+            {
+              "Id": "22271057",
+              "Attribute": "s",
+              "Metric": null,
+              "value": 3,
+              "operator": "="
+            }
+          ]
+        },
+        {
+          "Id": "52c12ec5",
+          "Probability": 0.01,
+          "Response": [
+            {
+              "Id": "22298327",
+              "Attribute": "s",
+              "Metric": null,
+              "value": 4,
+              "operator": "="
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "E-cdb68dac",
+      "Preconditions": [
+        {
+          "Id": "ab82b808",
+          "Attribute": "SBP",
+          "Metric": null,
+          "Greater-than": 120,
+          "AttributeType": "integer",
+          "MetricType": null
+        },
+        {
+          "Id": "ab82b809",
+          "Attribute": "SBP",
+          "Metric": null,
+          "Less-than": 140,
+          "AttributeType": "integer",
+          "MetricType": null
+        },
+        {
+          "Id": "2949b569",
+          "Attribute": "risk",
+          "Metric": null,
+          "Equal": 1,
+          "AttributeType": "boolean",
+          "MetricType": null
+        }
+      ],
+      "Effects": [
+        {
+          "Id": "cdb68dae",
+          "Probability": 0.41,
+          "Response": [
+            {
+              "Id": "19401527",
+              "Attribute": "SBP",
+              "Metric": null,
+              "value": 0,
+              "operator": "+"
+            },
+            {
+              "Id": "19418179",
+              "Attribute": "s",
+              "Metric": null,
+              "value": 1,
+              "operator": "="
+            }
+          ]
+        },
+        {
+          "Id": "ab82b807",
+          "Probability": 0.5,
+          "Response": [
+            {
+              "Id": "19503460",
+              "Attribute": "SBP",
+              "Metric": null,
+              "value": 10,
+              "operator": "+"
+            },
+            {
+              "Id": "19504466",
+              "Attribute": "s",
+              "Metric": null,
+              "value": 2,
+              "operator": "="
+            }
+          ]
+        },
+        {
+          "Id": "2949b56b",
+          "Probability": 0.05,
+          "Response": [
+            {
+              "Id": "19582122",
+              "Attribute": "s",
+              "Metric": null,
+              "value": 3,
+              "operator": "="
+            }
+          ]
+        },
+        {
+          "Id": "ab82b80b",
+          "Probability": 0.04,
+          "Response": [
+            {
+              "Id": "19604303",
+              "Attribute": "s",
+              "Metric": null,
+              "value": 4,
+              "operator": "="
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "E-d9b9bdf1",
+      "Preconditions": [
+        {
+          "Id": "d9b9bdf2",
+          "Attribute": "SBP",
+          "Metric": null,
+          "Greater-than": 140,
+          "AttributeType": "integer",
+          "MetricType": null
+        },
+        {
+          "Id": "d9b9bdf3",
+          "Attribute": "SBP",
+          "Metric": null,
+          "Less-than": 160,
+          "AttributeType": "integer",
+          "MetricType": null
+        },
+        {
+          "Id": "de05c46d",
+          "Attribute": "risk",
+          "Metric": null,
+          "Equal": 1,
+          "AttributeType": "boolean",
+          "MetricType": null
+        }
+      ],
+      "Effects": [
+        {
+          "Id": "de05c46f",
+          "Probability": 0.5,
+          "Response": [
+            {
+              "Id": "19896003",
+              "Attribute": "risk",
+              "Metric": null,
+              "value": 1,
+              "operator": "="
+            }
+          ]
+        },
+        {
+          "Id": "d9b9bdf5",
+          "Probability": 0.5,
+          "Response": [
+            {
+              "Id": "19958804",
+              "Attribute": "s",
+              "Metric": null,
+              "value": 4,
+              "operator": "="
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "Formula": "N=BB+ACE+ARB+CCB+TD",
+  "Property": "Pmax=? [ F (SBP>120&SBP<140) ]",
+  "id": "691094844b509f15523c698a"
+}

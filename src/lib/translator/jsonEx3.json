@@ -1,0 +1,42 @@
+{
+  "Situation": {
+    "Id": "S1",
+    "Attributes": [
+      {
+        "Name": "HEMOG",
+        "Type": "Decimal",
+        "Range": [0, 20],
+        "NormalRange": [14, 17],
+        "CurrentState": 10.1
+      }
+    ]
+  },
+  "Goals": [
+    {
+      "Id": "G1",
+      "Attribute_reference": "HEMOG",
+      "Range": [14, 17],
+      "Tactics": [
+        {
+          "Id": "T1",
+          "Name": "Tratar Anemia",
+          "Definition": "Tactic description",
+          "Preconditions": [],
+          "Rules": [],
+          "Metrics": [],
+          "Activities": [
+            {
+              "Id": "A1",
+              "Name": "Ração Super Premium",
+              "Preconditions": [],
+              "Effects": [{ "Id": "2d889984", "Probability": 1, "Response": [1] }],
+              "Costs": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "Criterion": { "TypeFunction": "Min", "Reward": "Monetary Cost" },
+  "id": "67843bb7e6fc0cb12d889985"
+}

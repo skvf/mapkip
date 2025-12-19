@@ -1,0 +1,421 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getCommands function passing json1 to be 9 1`] = `
+[
+  {
+    "action": "oral_antipyretical_medication_A1",
+    "effect": "0.6:(Temp'=370) + 0.3:(Temp'=Temp-5) + 0.1:(Temp'=Temp+5)",
+    "guard": "Temp>372 & LoNausea<2 & Allergic=false",
+  },
+  {
+    "action": "intravenous_antipyretical_medication_A2",
+    "effect": "0.8:(Temp'=370) + 0.1:(Temp'=Temp-5) + 0.1:(Temp'=Temp+5)",
+    "guard": "Temp>372 & LoNausea>1 & Allergic=false",
+  },
+  {
+    "action": "administer_medication_to_treat_the_cause_of_fever_A3",
+    "effect": "0.65:(Temp'=370) + 0.25:(Temp'=Temp-5) + 0.1:(Temp'=Temp+5)",
+    "guard": "cause_of_fever=true & Temp>372 & LoNausea<3 & Allergic=false",
+  },
+  {
+    "action": "physical_thermoregulation_of_the_patient_A4",
+    "effect": "0.6:(Temp'=Temp) + 0.4:(Temp'=Temp-2)",
+    "guard": "Temp>372",
+  },
+  {
+    "action": "administer_oxygen_as_appropriate_A5",
+    "effect": "1:(LoOxygen'=LoOxygen +1)",
+    "guard": "LoOxygen<3",
+  },
+  {
+    "action": "give_cold_fluids_A6",
+    "effect": "1:(LoHydratation'=LoHydratation +1)",
+    "guard": "LoHydratation<5",
+  },
+  {
+    "action": "give_antiemetic_medication_B1",
+    "effect": "0.7:(LoNausea'=0) + 0.2:(LoNausea'=LoNausea-1) + 0.1:(LoNausea'=LoNausea)",
+    "guard": "LoNausea>0 & Pregnant=false",
+  },
+  {
+    "action": "control_environmental_factors_B2",
+    "effect": "0.1:(LoNausea'=0) + 0.4:(LoNausea'=LoNausea-1) + 0.4:(LoNausea'=LoNausea) + 0.1:(LoNausea'=LoNausea+1)",
+    "guard": "LoNausea>0",
+  },
+  {
+    "action": "give_cold_fluids_B3",
+    "effect": "0.3:(LoNausea'=0) & (LoHydratation'=LoHydratation +1) + 0.4:(LoNausea'=LoNausea-1) & (LoHydratation'=LoHydratation +1) + 0.3:(LoNausea'=LoNausea-1) & (LoHydratation'=LoHydratation +1)",
+    "guard": "LoHydratation<10 & LoNausea<3",
+  },
+]
+`;
+
+exports[`getCommands function passing json2 to be 17 1`] = `
+[
+  {
+    "action": "reduce_sodium_intake_A1",
+    "effect": "0.5:(SBP'= SBP-3) + 0.3:(SBP'= SBP-2) + 0.2:(SBP'= SBP-1)",
+    "guard": "SBP>123",
+  },
+  {
+    "action": "increase_consumption_of_fruit_and_vegetables_A2",
+    "effect": "0.5:(SBP'= SBP-6) + 0.3:(SBP'= SBP-4) + 0.2:(SBP'= SBP-1)",
+    "guard": "SBP>125",
+  },
+  {
+    "action": "stop_beta-blocker_(bb)_A1",
+    "effect": "0.5:(SBP'= SBP+3 & BB) + 0.5:(SBP'= SBP & BB)",
+    "guard": "SEBB=true & SBP<170 & Total medicine Dose>0 & BB>0",
+  },
+  {
+    "action": "no_change_dose_of_bb_A2",
+    "effect": "0.84:(SBP'= SBP) + 0.15:(SBP'= SBP+3) + 0.01:(S'=3)",
+    "guard": "SBP>120",
+  },
+  {
+    "action": "increase_dose_of_bb_A3",
+    "effect": "0.6:(SBP'= SBP-7 & BB) + 0.34:(SBP'= SBP-3  & BB) + 0.06:(SBP'= SBP-1 & BB)",
+    "guard": "SEBB=false & SBP>130 & Total medicine Dose<8 & BB<2",
+  },
+  {
+    "action": "stop_ace_A1",
+    "effect": "0.5:(SBP'= SBP+3 & ACE) + 0.5:(SBP'= SBP & ACE)",
+    "guard": "SEACE=true & SBP<170 & Total medicine Dose>0 & ACE>0",
+  },
+  {
+    "action": "no_change_dose_of_ace_A2",
+    "effect": "0.84:(SBP'= SBP) + 0.15:(SBP'= SBP+3) + 0.01:(S'=3)",
+    "guard": "SBP>120",
+  },
+  {
+    "action": "increase_dose_of_bb_A3",
+    "effect": "0.6:(SBP'= SBP-6 & ACE) + 0.36:(SBP'= SBP-3  & ACE) + 0.04:(SBP'= SBP-1 & ACE)",
+    "guard": "SEACE=false & ARB=0 & SBP>130 & Total medicine Dose<8 & ACE<2",
+  },
+  {
+    "action": "stop_arb_A1",
+    "effect": "0.5:(SBP'= SBP+3 & ARB) + 0.5:(SBP'= SBP & ARB)",
+    "guard": "SEARB=true & SBP<170 & Total medicine Dose>0 & ARB>0",
+  },
+  {
+    "action": "no_change_dose_of_arb_A2",
+    "effect": "0.84:(SBP'= SBP) + 0.15:(SBP'= SBP+3) + 0.01:(S'=3)",
+    "guard": "SBP>120",
+  },
+  {
+    "action": "increase_dose_of_arb_A3",
+    "effect": "0.6:(SBP'= SBP-6 & ARB) + 0.3:(SBP'= SBP-3  & ARB) + 0.1:(SBP'= SBP-1 & ARB)",
+    "guard": "SEARB=false & ACE=0 & SBP>130 & Total medicine Dose<8 & ARB<2",
+  },
+  {
+    "action": "stop_ccb_A1",
+    "effect": "0.5:(SBP'= SBP+3 & CCB) + 0.5:(SBP'= SBP & CCB)",
+    "guard": "SECCB=true & SBP<170 & Total medicine Dose>0 & CCB>0",
+  },
+  {
+    "action": "no_change_dose_of_ccb_A2",
+    "effect": "0.84:(SBP'= SBP) + 0.15:(SBP'= SBP+3) + 0.01:(S'=3)",
+    "guard": "SBP>120",
+  },
+  {
+    "action": "increase_dose_of_arb_A3",
+    "effect": "0.6:(SBP'= SBP-6 & CCB) + 0.38:(SBP'= SBP-3  & CCB) + 0.02:(SBP'= SBP-1 & CCB)",
+    "guard": "SECCB=false & SBP>130 & Total medicine Dose<8 & CCB<2",
+  },
+  {
+    "action": "stop_td_A1",
+    "effect": "0.5:(SBP'= SBP+3 & TD) + 0.5:(SBP'= SBP & TD)",
+    "guard": "SETD=true & SBP<170 & Total medicine Dose>0 & TD>0",
+  },
+  {
+    "action": "no_change_dose_of_td_A2",
+    "effect": "0.84:(SBP'= SBP) + 0.15:(SBP'= SBP+3) + 0.01:(S'=3)",
+    "guard": "SBP>120 & SBP<130",
+  },
+  {
+    "action": "increase_dose_of_arb_A3",
+    "effect": "0.6:(SBP'= SBP-6 & TD) + 0.38:(SBP'= SBP-3  & TD) + 0.02:(SBP'= SBP-1 & TD)",
+    "guard": "SETD=false & SBP>130 & Total medicine Dose<8 & TD<2",
+  },
+]
+`;
+
+exports[`getRewards function passing json1 to be 2 1`] = `
+[
+  {
+    "Items": [
+      {
+        "Activity_Id": "A1",
+        "Activity_Name": "Oral antipyretical medication",
+        "Name": "Execution Time",
+        "Unit": "Minutes",
+        "Value": 5,
+      },
+      {
+        "Activity_Id": "A2",
+        "Activity_Name": "Intravenous antipyretical medication",
+        "Name": "Execution Time",
+        "Unit": "Minutes",
+        "Value": 5,
+      },
+      {
+        "Activity_Id": "A3",
+        "Activity_Name": "Administer medication to treat the cause of fever",
+        "Name": "Execution Time",
+        "Unit": "Minutes",
+        "Value": 5,
+      },
+      {
+        "Activity_Id": "A4",
+        "Activity_Name": "physical_thermoregulation_of_the_patient",
+        "Name": "Execution Time",
+        "Unit": "Minutes",
+        "Value": 15,
+      },
+      {
+        "Activity_Id": "B1",
+        "Activity_Name": "Give antiemetic medication",
+        "Name": "Execution Time",
+        "Unit": "Minutes",
+        "Value": 5,
+      },
+      {
+        "Activity_Id": "B2",
+        "Activity_Name": "Control_environmental_factors",
+        "Name": "Execution Time",
+        "Unit": "Minutes",
+        "Value": 20,
+      },
+      {
+        "Activity_Id": "B3",
+        "Activity_Name": "Give cold fluids",
+        "Name": "Execution Time",
+        "Unit": "Minutes",
+        "Value": 5,
+      },
+    ],
+    "Name": "Execution Time",
+  },
+  {
+    "Items": [
+      {
+        "Activity_Id": "A1",
+        "Activity_Name": "Oral antipyretical medication",
+        "Name": "Monetary Cost",
+        "Unit": "Dolars",
+        "Value": 0.18,
+      },
+      {
+        "Activity_Id": "A2",
+        "Activity_Name": "Intravenous antipyretical medication",
+        "Name": "Monetary Cost",
+        "Unit": "Dolars",
+        "Value": 0.38,
+      },
+      {
+        "Activity_Id": "A3",
+        "Activity_Name": "Administer medication to treat the cause of fever",
+        "Name": "Monetary Cost",
+        "Unit": "Dolars",
+        "Value": 0.23,
+      },
+      {
+        "Activity_Id": "A4",
+        "Activity_Name": "physical_thermoregulation_of_the_patient",
+        "Name": "Monetary Cost",
+        "Unit": "Dolars",
+        "Value": 0.16,
+      },
+      {
+        "Activity_Id": "B1",
+        "Activity_Name": "Give antiemetic medication",
+        "Name": "Monetary Cost",
+        "Unit": "Dolars",
+        "Value": 0.08,
+      },
+      {
+        "Activity_Id": "B2",
+        "Activity_Name": "Control_environmental_factors",
+        "Name": "Monetary Cost",
+        "Unit": "Dolars",
+        "Value": 0.32,
+      },
+      {
+        "Activity_Id": "B3",
+        "Activity_Name": "Give cold fluids",
+        "Name": "Monetary Cost",
+        "Unit": "Dolars",
+        "Value": 0.32,
+      },
+    ],
+    "Name": "Monetary Cost",
+  },
+]
+`;
+
+exports[`getRewards function passing json2 to be 1 1`] = `
+[
+  {
+    "Items": [
+      {
+        "Activity_Cost": undefined,
+        "Activity_Id": "A1",
+        "Activity_Name": "Reduce sodium intake",
+      },
+      {
+        "Activity_Cost": undefined,
+        "Activity_Id": "A2",
+        "Activity_Name": "Increase consumption of fruit and vegetables",
+      },
+      {
+        "Activity_Cost": undefined,
+        "Activity_Id": "A1",
+        "Activity_Name": "Stop Beta-blocker (BB)",
+      },
+      {
+        "Activity_Cost": undefined,
+        "Activity_Id": "A2",
+        "Activity_Name": "No change dose of BB",
+      },
+      {
+        "Activity_Cost": undefined,
+        "Activity_Id": "A3",
+        "Activity_Name": "Increase dose of BB",
+      },
+      {
+        "Activity_Cost": undefined,
+        "Activity_Id": "A1",
+        "Activity_Name": "Stop ACE",
+      },
+      {
+        "Activity_Cost": undefined,
+        "Activity_Id": "A2",
+        "Activity_Name": "No change dose of ACE",
+      },
+      {
+        "Activity_Cost": undefined,
+        "Activity_Id": "A3",
+        "Activity_Name": "Increase dose of BB",
+      },
+      {
+        "Activity_Cost": undefined,
+        "Activity_Id": "A1",
+        "Activity_Name": "Stop ARB",
+      },
+      {
+        "Activity_Cost": undefined,
+        "Activity_Id": "A2",
+        "Activity_Name": "No change dose of ARB",
+      },
+      {
+        "Activity_Cost": undefined,
+        "Activity_Id": "A3",
+        "Activity_Name": "Increase dose of ARB",
+      },
+      {
+        "Activity_Cost": undefined,
+        "Activity_Id": "A1",
+        "Activity_Name": "Stop CCB",
+      },
+      {
+        "Activity_Cost": undefined,
+        "Activity_Id": "A2",
+        "Activity_Name": "No change dose of CCB",
+      },
+      {
+        "Activity_Cost": undefined,
+        "Activity_Id": "A3",
+        "Activity_Name": "Increase dose of ARB",
+      },
+      {
+        "Activity_Cost": undefined,
+        "Activity_Id": "A1",
+        "Activity_Name": "Stop TD",
+      },
+      {
+        "Activity_Cost": undefined,
+        "Activity_Id": "A2",
+        "Activity_Name": "No change dose of TD",
+      },
+      {
+        "Activity_Cost": undefined,
+        "Activity_Id": "A3",
+        "Activity_Name": "Increase dose of ARB",
+      },
+    ],
+    "Name": "undefined",
+  },
+]
+`;
+
+exports[`getState function passing json1 to be 8 1`] = `
+[
+  {
+    "current": 380,
+    "name": "Temp",
+    "values": "[350..400]",
+  },
+  {
+    "current": 4,
+    "name": "LoNausea",
+    "values": "[0..4]",
+  },
+  {
+    "current": true,
+    "name": "Allergic",
+    "values": "bool",
+  },
+  {
+    "current": true,
+    "name": "Pregnant",
+    "values": "bool",
+  },
+  {
+    "current": 6,
+    "name": "LoHydratation",
+    "values": "[0..10]",
+  },
+  {
+    "current": 4,
+    "name": "LoOxygen",
+    "values": "[0..5]",
+  },
+  {
+    "current": true,
+    "name": "arrhythmias",
+    "values": "bool",
+  },
+  {
+    "current": true,
+    "name": "cause_of_fever",
+    "values": "bool",
+  },
+]
+`;
+
+exports[`getState function passing json2 to be 8 1`] = `
+[
+  undefined,
+  undefined,
+  undefined,
+  undefined,
+  undefined,
+  undefined,
+  undefined,
+  undefined,
+  undefined,
+  undefined,
+  undefined,
+  undefined,
+  {
+    "current": 147,
+    "name": "SBP",
+    "values": "[80..190]",
+  },
+  {
+    "current": true,
+    "name": "Risk",
+    "values": "bool",
+  },
+]
+`;

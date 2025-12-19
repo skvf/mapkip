@@ -1,0 +1,491 @@
+{
+  "Situation": {
+    "Id": "Patient",
+    "Attributes": [
+      {
+        "Name": "Temp",
+        "Type": "Decimal",
+        "Range": [35, 40],
+        "NormalRange": [35, 37],
+        "CriticalRange": [37.5, 40],
+        "CurrentState": 38
+      },
+      {
+        "Name": "LoNausea",
+        "Type": "Integer",
+        "Range": [0, 4],
+        "NormalRange": 0,
+        "CriticalRange": [1, 4],
+        "CurrentState": 4
+      },
+      {
+        "Name": "Allergic",
+        "Type": "Boolean",
+        "Range": ["true", "false"],
+        "NormalRange": "false",
+        "CriticalRange": "true",
+        "CurrentState": "false"
+      },
+      {
+        "Name": "Pregnant",
+        "Type": "Boolean",
+        "Range": ["true", "false"],
+        "NormalRange": "false",
+        "CriticalRange": "true",
+        "CurrentState": "false"
+      },
+      {
+        "Name": "LoHydratation",
+        "Type": "Integer",
+        "Range": [0, 10],
+        "NormalRange": [7, 10],
+        "CriticalRange": [0, 4],
+        "CurrentState": 6
+      },
+      {
+        "Name": "LoOxygen",
+        "Type": "Integer",
+        "Range": [0, 5],
+        "NormalRange": [3, 5],
+        "CriticalRange": [0, 3],
+        "CurrentState": 4
+      },
+      {
+        "Name": "arrhythmias",
+        "Type": "Boolean",
+        "Range": ["true", "false"],
+        "NormalRange": "false",
+        "CriticalRange": "true",
+        "CurrentState": "false"
+      },
+      {
+        "Name": "cause_of_fever",
+        "Type": "Boolean",
+        "Range": ["true", "false"],
+        "CurrentState": "false"
+      }
+    ]
+  },
+  "Goals": [
+    {
+      "id": "SubGoal1",
+      "Attribute_reference": "Temp",
+      "Range": [36.2, 37.2],
+      "Tactics": [
+        {
+          "Id": "T1",
+          "Name": "Fever Management (FVR)",
+          "Definition": "Fever management",
+          "Preconditions": [
+            {
+              "Attribute": "Temp",
+              "Greater-than": 37.2
+            }
+          ],
+          "Rules": [{}],
+          "Metrics": [
+            {
+              "Variable": "CA1",
+              "Definition": "Counter of A1",
+              "Type": "Integer",
+              "Range": [0, 2]
+            },
+            {
+              "Variable": "CA2",
+              "Definition": "Counter of A2",
+              "Type": "Integer",
+              "Range": [0, 1]
+            },
+            {
+              "Variable": "CA3",
+              "Definition": "Counter of A3",
+              "Type": "Integer",
+              "Range": [0, 2]
+            }
+          ],
+          "Activities": [
+            {
+              "Id": "A1",
+              "Name": "Oral antipyretical medication",
+              "Preconditions": [
+                {
+                  "Attribute": "Temp",
+                  "Greater-than": 37.2
+                },
+                {
+                  "Attribute": "LoNausea",
+                  "Less-than": 2
+                },
+                {
+                  "Attribute": "Allergic",
+                  "Equals": "false"
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "E1",
+                  "Probability": 0.6,
+                  "Response": ["Temp=37"]
+                },
+                {
+                  "Id": "E2",
+                  "Probability": 0.3,
+                  "Response": ["Temp=Temp-0.5"]
+                },
+                {
+                  "Id": "E3",
+                  "Probability": 0.1,
+                  "Response": ["Temp=Temp+0.5"]
+                }
+              ],
+              "Costs": [
+                {
+                  "Name": "Execution Time",
+                  "Unit": "Minutes",
+                  "Value": 5
+                },
+                {
+                  "Name": "Monetary Cost",
+                  "Unit": "Dolars",
+                  "Value": 0.18
+                }
+              ]
+            },
+            {
+              "Id": "A2",
+              "Name": "Intravenous antipyretical medication",
+              "Preconditions": [
+                {
+                  "Attribute": "Temp",
+                  "Greater-than": 37.2
+                },
+                {
+                  "Attribute": "LoNausea",
+                  "Greater-than": 1
+                },
+                {
+                  "Attribute": "Allergic",
+                  "Equals": "false"
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "E1",
+                  "Probability": 0.8,
+                  "Response": ["Temp=37"]
+                },
+                {
+                  "Id": "E2",
+                  "Probability": 0.1,
+                  "Response": ["Temp=Temp-0.5"]
+                },
+                {
+                  "Id": "E3",
+                  "Probability": 0.1,
+                  "Response": ["Temp=Temp+0.5"]
+                }
+              ],
+              "Costs": [
+                {
+                  "Name": "Execution Time",
+                  "Unit": "Minutes",
+                  "Value": 5
+                },
+                {
+                  "Name": "Monetary Cost",
+                  "Unit": "Dolars",
+                  "Value": 0.38
+                }
+              ]
+            },
+            {
+              "Id": "A3",
+              "Name": "Administer medication to treat the cause of fever",
+              "Preconditions": [
+                {
+                  "Attribute": "cause_of_fever",
+                  "Equals": "true"
+                },
+                {
+                  "Attribute": "Temp",
+                  "Greater-than": 37.2
+                },
+                {
+                  "Attribute": "LoNausea",
+                  "Less-than": 3
+                },
+                {
+                  "Attribute": "Allergic",
+                  "Equals": "false"
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "E1",
+                  "Probability": 0.65,
+                  "Response": ["Temp=37"]
+                },
+                {
+                  "Id": "E2",
+                  "Probability": 0.25,
+                  "Response": ["Temp=Temp-0.5"]
+                },
+                {
+                  "Id": "E3",
+                  "Probability": 0.1,
+                  "Response": ["Temp=Temp+0.5"]
+                }
+              ],
+              "Costs": [
+                {
+                  "Name": "Execution Time",
+                  "Unit": "Minutes",
+                  "Value": 5
+                },
+                {
+                  "Name": "Monetary Cost",
+                  "Unit": "Dolars",
+                  "Value": 0.23
+                }
+              ]
+            },
+            {
+              "Id": "A4",
+              "Name": "physical_thermoregulation_of_the_patient",
+              "Preconditions": [
+                {
+                  "Attribute": "Temp",
+                  "Greater-than": 37.2
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "E1",
+                  "Probability": 0.6,
+                  "Response": ["Temp=Temp"]
+                },
+                {
+                  "Id": "E2",
+                  "Probability": 0.4,
+                  "Response": ["Temp=Temp-0.2"]
+                }
+              ],
+              "Costs": [
+                {
+                  "Name": "Execution Time",
+                  "Unit": "Minutes",
+                  "Value": 15
+                },
+                {
+                  "Name": "Monetary Cost",
+                  "Unit": "Dolars",
+                  "Value": 0.16
+                }
+              ]
+            },
+            {
+              "Id": "A5",
+              "Name": "Administer oxygen as appropriate",
+              "Preconditions": [
+                {
+                  "Attribute": "LoOxygen",
+                  "Less-than": 3
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "E1",
+                  "Probability": 1,
+                  "Response": ["LoOxygen=LoOxygen +1"]
+                }
+              ],
+              "Costs": []
+            },
+            {
+              "Id": "A6",
+              "Name": "Give cold fluids",
+              "Preconditions": [
+                {
+                  "Attribute": "LoHydratation",
+                  "Less-than": 5
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "E1",
+                  "Probability": 1,
+                  "Response": ["LoHydratation=LoHydratation +1"]
+                }
+              ],
+              "Costs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SubGoal2",
+      "Attribute_reference": "LoNausea",
+      "Equals": 0,
+      "Tactics": [
+        {
+          "Id": "T2",
+          "Name": "Nausea Management (Nausea)",
+          "Definition": "Prevention and alleviation of nausea",
+          "Preconditions": [
+            {
+              "Attribute": "LoNauses",
+              "Greater-than": 0
+            }
+          ],
+          "Rules": [{}],
+          "Metrics": [
+            {
+              "Variable": "CB1",
+              "Definition": "Counter of B1",
+              "Type": "Integer",
+              "Range": [0, 2]
+            }
+          ],
+          "Activities": [
+            {
+              "Id": "B1",
+              "Name": "Give antiemetic medication",
+              "Preconditions": [
+                {
+                  "Attribute": "LoNausea",
+                  "Greater-than": 0
+                },
+                {
+                  "Attribute": "Pregnant",
+                  "Equals": "false"
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "E1",
+                  "Probability": 0.7,
+                  "Response": ["LoNausea=0"]
+                },
+                {
+                  "Id": "E2",
+                  "Probability": 0.2,
+                  "Response": ["LoNausea=LoNausea-1"]
+                },
+                {
+                  "Id": "E3",
+                  "Probability": 0.1,
+                  "Response": ["LoNausea=LoNausea"]
+                }
+              ],
+              "Costs": [
+                {
+                  "Name": "Execution Time",
+                  "Unit": "Minutes",
+                  "Value": 5
+                },
+                {
+                  "Name": "Monetary Cost",
+                  "Unit": "Dolars",
+                  "Value": 0.08
+                }
+              ]
+            },
+            {
+              "Id": "B2",
+              "Name": "Control_environmental_factors",
+              "Preconditions": [
+                {
+                  "Attribute": "LoNausea",
+                  "Greater-than": 0,
+                  "Less-than": 3
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "E1",
+                  "Probability": 0.1,
+                  "Response": ["LoNausea=0"]
+                },
+                {
+                  "Id": "E2",
+                  "Probability": 0.4,
+                  "Response": ["LoNausea=LoNausea-1"]
+                },
+                {
+                  "Id": "E3",
+                  "Probability": 0.4,
+                  "Response": ["LoNausea=LoNausea"]
+                },
+                {
+                  "Id": "E4",
+                  "Probability": 0.1,
+                  "Response": ["LoNausea=LoNausea+1"]
+                }
+              ],
+              "Costs": [
+                {
+                  "Name": "Execution Time",
+                  "Unit": "Minutes",
+                  "Value": 20
+                },
+                {
+                  "Name": "Monetary Cost",
+                  "Unit": "Dolars",
+                  "Value": 0.32
+                }
+              ]
+            },
+            {
+              "Id": "B3",
+              "Name": "Give cold fluids",
+              "Preconditions": [
+                {
+                  "Attribute": "LoHydratation",
+                  "Less-than": 10
+                },
+                {
+                  "Attribute": "LoNausea",
+                  "Less-than": 3
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "E1",
+                  "Probability": 0.3,
+                  "Response": ["LoNausea=0", "LoHydratation=LoHydratation +1"]
+                },
+                {
+                  "Id": "E2",
+                  "Probability": 0.4,
+                  "Response": ["LoNausea=LoNausea-1", "LoHydratation=LoHydratation +1"]
+                },
+                {
+                  "Id": "E3",
+                  "Probability": 0.3,
+                  "Response": ["LoNausea=LoNausea-1", "LoHydratation=LoHydratation +1"]
+                }
+              ],
+              "Costs": [
+                {
+                  "Name": "Execution Time",
+                  "Unit": "Minutes",
+                  "Value": 5
+                },
+                {
+                  "Name": "Monetary Cost",
+                  "Unit": "Dolars",
+                  "Value": 0.32
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "Criterion": {
+    "TypeFunction": "Min",
+    "Reward": "Monetary Cost"
+  }
+}

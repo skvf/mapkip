@@ -1,0 +1,949 @@
+{
+  "Situation": {
+    "Id": "CVD",
+    "Attributes": [
+      {
+        "Name": "SEBB"
+      },
+      {
+        "Name": "Total medicine Dose"
+      },
+      {
+        "Name": "BB"
+      },
+      {
+        "Name": "S"
+      },
+      {
+        "Name": "SEACE"
+      },
+      {
+        "Name": "ACE"
+      },
+      {
+        "Name": "ARB"
+      },
+      {
+        "Name": "SEARB"
+      },
+      {
+        "Name": "SECCB"
+      },
+      {
+        "Name": "CCB"
+      },
+      {
+        "Name": "SETD"
+      },
+      {
+        "Name": "TD"
+      },
+      {
+        "Name": "SBP",
+        "Type": "Integer",
+        "Range": [80, 190],
+        "NormalRange": [80, 119],
+        "CriticalRange": [120, 190],
+        "CurrentState": 147
+      },
+      {
+        "Name": "Risk",
+        "Type": "Boolean",
+        "Range": ["true", "False"],
+        "NormalRange": "false",
+        "CriticalRange": "True",
+        "CurrentState": "false"
+      }
+    ]
+  },
+  "Goals": [
+    {
+      "id": "SubGoal1",
+      "Attribute_reference": "SBP",
+      "Range": [120, 140],
+      "Tactics": [
+        {
+          "Id": "T1",
+          "Name": "Change lifestyle habits",
+          "Definition": "Have healthy habits",
+          "Preconditions": [
+            {
+              "Attribute": "SBP",
+              "Greater-than": 120
+            }
+          ],
+          "Rules": [],
+          "Metrics": [],
+          "Activities": [
+            {
+              "Id": "A1",
+              "Name": "Reduce sodium intake",
+              "Preconditions": [
+                {
+                  "Attribute": "SBP",
+                  "Greater-than": 123
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "E1",
+                  "Probability": 0.5,
+                  "Response": ["SBP= SBP-3"]
+                },
+                {
+                  "Id": "E2",
+                  "Probability": 0.3,
+                  "Response": ["SBP= SBP-2"]
+                },
+                {
+                  "Id": "E3",
+                  "Probability": 0.2,
+                  "Response": ["SBP= SBP-1"]
+                }
+              ],
+              "Costs": [
+                {
+                  "Name": "Monetary Cost",
+                  "Unit": "Dolars",
+                  "Value": 1
+                }
+              ]
+            },
+            {
+              "Id": "A2",
+              "Name": "Increase consumption of fruit and vegetables",
+              "Preconditions": [
+                {
+                  "Attribute": "SBP",
+                  "Greater-than": 125
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "E1",
+                  "Probability": 0.5,
+                  "Response": ["SBP= SBP-6"]
+                },
+                {
+                  "Id": "E2",
+                  "Probability": 0.3,
+                  "Response": ["SBP= SBP-4"]
+                },
+                {
+                  "Id": "E3",
+                  "Probability": 0.2,
+                  "Response": ["SBP= SBP-1"]
+                }
+              ],
+              "Costs": [
+                {
+                  "Name": "Monetary Cost",
+                  "Unit": "Dolars",
+                  "Value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Id": "T2",
+          "Name": "Administer beta-blocker",
+          "Definition": "Administer beta-blocker",
+          "Preconditions": [
+            {
+              "Attribute": "SBP",
+              "Greater-than": 120
+            }
+          ],
+          "Rules": [],
+          "Metrics": [
+            {
+              "Variable": "S",
+              "Definition": "state of disease progression",
+              "Range": [1, 4],
+              "Type": "Integer"
+            },
+            {
+              "Varible": "BB",
+              "Definition": "Counter of BB dose",
+              "Type": "Integer",
+              "Range": [0, 2]
+            },
+            {
+              "Varible": "SEBB",
+              "Definition": "Flag for side effects of BB",
+              "Type": "Boolean",
+              "Range": ["true", "false"]
+            }
+          ],
+          "Activities": [
+            {
+              "Id": "A1",
+              "Name": "Stop Beta-blocker (BB)",
+              "Preconditions": [
+                {
+                  "Attribute": "SEBB",
+                  "Equals": "true"
+                },
+                {
+                  "Attribute": "SBP",
+                  "Less-than": 170
+                },
+                {
+                  "Attribute": "Total medicine Dose",
+                  "Greater-than": 0
+                },
+                {
+                  "Attribute": "BB",
+                  "Greater-than": 0
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "E1",
+                  "Probability": 0.5,
+                  "Response": ["SBP= SBP+3 & BB= 0"]
+                },
+                {
+                  "Id": "E2",
+                  "Probability": 0.5,
+                  "Response": ["SBP= SBP & BB= 0"]
+                }
+              ],
+              "Costs": [
+                {
+                  "Name": "Monetary Cost",
+                  "Unit": "Dolars",
+                  "Value": 0
+                }
+              ]
+            },
+            {
+              "Id": "A2",
+              "Name": "No change dose of BB",
+              "Preconditions": [
+                {
+                  "Attribute": "SBP",
+                  "Greater-than": 120,
+                  "Less-than": 130
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "E1",
+                  "Probability": 0.84,
+                  "Response": ["SBP= SBP"]
+                },
+                {
+                  "Id": "E2",
+                  "Probability": 0.15,
+                  "Response": ["SBP= SBP+3"]
+                },
+                {
+                  "Id": "E3",
+                  "Probability": 0.01,
+                  "Response": ["S=3"]
+                }
+              ],
+              "Costs": [
+                {
+                  "Name": "Monetary Cost",
+                  "Unit": "Dolars",
+                  "Value": 0
+                }
+              ]
+            },
+            {
+              "Id": "A3",
+              "Name": "Increase dose of BB",
+              "Preconditions": [
+                {
+                  "Attribute": "SEBB",
+                  "Equals": "false"
+                },
+                {
+                  "Attribute": "SBP",
+                  "Greater-than": 130
+                },
+                {
+                  "Attribute": "Total medicine Dose",
+                  "Less-than": 8
+                },
+                {
+                  "Attribute": "BB",
+                  "Less-than": 2
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "E1",
+                  "Probability": 0.6,
+                  "Response": ["SBP= SBP-7 & BB=BB+1"]
+                },
+                {
+                  "Id": "E2",
+                  "Probability": 0.34,
+                  "Response": ["SBP= SBP-3  & BB=BB+1"]
+                },
+                {
+                  "Id": "E3",
+                  "Probability": 0.06,
+                  "Response": ["SBP= SBP-1 & BB=BB+1 & SEBB=true"]
+                }
+              ],
+              "Costs": [
+                {
+                  "Name": "Monetary Cost",
+                  "Unit": "Dolars",
+                  "Value": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Id": "T3",
+          "Name": "Administer angiotensin converting enzyme(ACE)",
+          "Definition": "Administer angiotensin converting enzyme(ACE)",
+          "Preconditions": [
+            {
+              "Attribute": "SBP",
+              "Greater-than": 120
+            }
+          ],
+          "Rules": [],
+          "Metrics": [
+            {
+              "Variable": "S",
+              "Definition": "state of disease progression",
+              "Range": [1, 4],
+              "Type": "Integer"
+            },
+            {
+              "Variable": "ACE",
+              "Definition": "Counter of ACE dose",
+              "Type": "Integer",
+              "Range": [0, 2]
+            },
+            {
+              "Varible": "SEACE",
+              "Definition": "Flag for side effects of ACE",
+              "Type": "Boolean",
+              "Range": ["true", "false"]
+            }
+          ],
+          "Activities": [
+            {
+              "Id": "A1",
+              "Name": "Stop ACE",
+              "Preconditions": [
+                {
+                  "Attribute": "SEACE",
+                  "Equals": "true"
+                },
+                {
+                  "Attribute": "SBP",
+                  "Less-than": 170
+                },
+                {
+                  "Attribute": "Total medicine Dose",
+                  "Greater-than": 0
+                },
+                {
+                  "Attribute": "ACE",
+                  "Greater-than": 0
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "E1",
+                  "Probability": 0.5,
+                  "Response": ["SBP= SBP+3 & ACE= 0"]
+                },
+                {
+                  "Id": "E2",
+                  "Probability": 0.5,
+                  "Response": ["SBP= SBP & ACE= 0"]
+                }
+              ],
+              "Costs": [
+                {
+                  "Name": "Monetary Cost",
+                  "Unit": "Dolars",
+                  "Value": 0
+                }
+              ]
+            },
+            {
+              "Id": "A2",
+              "Name": "No change dose of ACE",
+              "Preconditions": [
+                {
+                  "Attribute": "SBP",
+                  "Greater-than": 120,
+                  "Less-than": 130
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "E1",
+                  "Probability": 0.84,
+                  "Response": ["SBP= SBP"]
+                },
+                {
+                  "Id": "E2",
+                  "Probability": 0.15,
+                  "Response": ["SBP= SBP+3"]
+                },
+                {
+                  "Id": "E3",
+                  "Probability": 0.01,
+                  "Response": ["S=3"]
+                }
+              ],
+              "Costs": [
+                {
+                  "Name": "Monetary Cost",
+                  "Unit": "Dolars",
+                  "Value": 0
+                }
+              ]
+            },
+            {
+              "Id": "A3",
+              "Name": "Increase dose of BB",
+              "Preconditions": [
+                {
+                  "Attribute": "SEACE",
+                  "Equals": "false"
+                },
+                {
+                  "Attribute": "ARB",
+                  "Equals": 0
+                },
+                {
+                  "Attribute": "SBP",
+                  "Greater-than": 130
+                },
+                {
+                  "Attribute": "Total medicine Dose",
+                  "Less-than": 8
+                },
+                {
+                  "Attribute": "ACE",
+                  "Less-than": 2
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "E1",
+                  "Probability": 0.6,
+                  "Response": ["SBP= SBP-6 & ACE=ACE+1"]
+                },
+                {
+                  "Id": "E2",
+                  "Probability": 0.36,
+                  "Response": ["SBP= SBP-3  & ACE=ACE+1"]
+                },
+                {
+                  "Id": "E3",
+                  "Probability": 0.04,
+                  "Response": ["SBP= SBP-1 & ACE=ACE+1 & SEACE=true"]
+                }
+              ],
+              "Costs": [
+                {
+                  "Name": "Monetary Cost",
+                  "Unit": "Dolars",
+                  "Value": 10
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Id": "T4",
+          "Name": "Administer angiotensin receptor blocker (ARB))",
+          "Definition": "Administer angiotensin receptor blocker (ARB)",
+          "Preconditions": [
+            {
+              "Attribute": "SBP",
+              "Greater-than": 120
+            }
+          ],
+          "Rules": [],
+          "Metrics": [
+            {
+              "Variable": "S",
+              "Definition": "state of disease progression",
+
+              "Type": "Integer",
+              "Range": [1, 4]
+            },
+            {
+              "Variable": "ARB",
+              "Definition": "Counter of ARB dose",
+              "Type": "Integer",
+              "Range": [0, 2]
+            },
+            {
+              "Varible": "SEARB",
+              "Definition": "Flag for side effects of ARB",
+              "Type": "Boolean",
+              "Range": ["true", "false"]
+            }
+          ],
+          "Activities": [
+            {
+              "Id": "A1",
+              "Name": "Stop ARB",
+              "Preconditions": [
+                {
+                  "Attribute": "SEARB",
+                  "Equals": "true"
+                },
+                {
+                  "Attribute": "SBP",
+                  "Less-than": 170
+                },
+                {
+                  "Attribute": "Total medicine Dose",
+                  "Greater-than": 0
+                },
+                {
+                  "Attribute": "ARB",
+                  "Greater-than": 0
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "E1",
+                  "Probability": 0.5,
+                  "Response": ["SBP= SBP+3 & ARB= 0"]
+                },
+                {
+                  "Id": "E2",
+                  "Probability": 0.5,
+                  "Response": ["SBP= SBP & ARB= 0"]
+                }
+              ],
+              "Costs": [
+                {
+                  "Name": "Monetary Cost",
+                  "Unit": "Dolars",
+                  "Value": 0
+                }
+              ]
+            },
+            {
+              "Id": "A2",
+              "Name": "No change dose of ARB",
+              "Preconditions": [
+                {
+                  "Attribute": "SBP",
+                  "Greater-than": 120,
+                  "Less-than": 130
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "E1",
+                  "Probability": 0.84,
+                  "Response": ["SBP= SBP"]
+                },
+                {
+                  "Id": "E2",
+                  "Probability": 0.15,
+                  "Response": ["SBP= SBP+3"]
+                },
+                {
+                  "Id": "E3",
+                  "Probability": 0.01,
+                  "Response": ["S=3"]
+                }
+              ],
+              "Costs": [
+                {
+                  "Name": "Monetary Cost",
+                  "Unit": "Dolars",
+                  "Value": 0
+                }
+              ]
+            },
+            {
+              "Id": "A3",
+              "Name": "Increase dose of ARB",
+              "Preconditions": [
+                {
+                  "Attribute": "SEARB",
+                  "Equals": "false"
+                },
+                {
+                  "Attribute": "ACE",
+                  "Equals": 0
+                },
+                {
+                  "Attribute": "SBP",
+                  "Greater-than": 130
+                },
+                {
+                  "Attribute": "Total medicine Dose",
+                  "Less-than": 8
+                },
+                {
+                  "Attribute": "ARB",
+                  "Less-than": 2
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "E1",
+                  "Probability": 0.6,
+                  "Response": ["SBP= SBP-6 & ARB=ARB+1"]
+                },
+                {
+                  "Id": "E2",
+                  "Probability": 0.3,
+                  "Response": ["SBP= SBP-3  & ARB=ARB+1"]
+                },
+                {
+                  "Id": "E3",
+                  "Probability": 0.1,
+                  "Response": ["SBP= SBP-1 & ARB=ARB+1 & SEARB=true"]
+                }
+              ],
+              "Costs": [
+                {
+                  "Name": "Monetary Cost",
+                  "Unit": "Dolars",
+                  "Value": 10
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Id": "T5",
+          "Name": "Administer calcium channel Blocker (CCB))",
+          "Definition": "Administer calcium channel Blocker (CCB)",
+          "Preconditions": [
+            {
+              "Attribute": "SBP",
+              "Greater-than": 120
+            }
+          ],
+          "Rules": [],
+          "Metrics": [
+            {
+              "Variable": "S",
+              "Type": "Integer",
+              "Definition": "state of disease progression",
+              "Range": [1, 4]
+            },
+            {
+              "Variable": "CCB",
+              "Definition": "Counter of CCB dose",
+              "Type": "Integer",
+              "Range": [0, 2]
+            },
+            {
+              "Varible": "SECCB",
+              "Definition": "Flag for side effects of CCB",
+              "Type": "Boolean",
+              "Range": ["true", "false"]
+            }
+          ],
+          "Activities": [
+            {
+              "Id": "A1",
+              "Name": "Stop CCB",
+              "Preconditions": [
+                {
+                  "Attribute": "SECCB",
+                  "Equals": "true"
+                },
+                {
+                  "Attribute": "SBP",
+                  "Less-than": 170
+                },
+                {
+                  "Attribute": "Total medicine Dose",
+                  "Greater-than": 0
+                },
+                {
+                  "Attribute": "CCB",
+                  "Greater-than": 0
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "E1",
+                  "Probability": 0.5,
+                  "Response": ["SBP= SBP+3 & CCB= 0"]
+                },
+                {
+                  "Id": "E2",
+                  "Probability": 0.5,
+                  "Response": ["SBP= SBP & CCB= 0"]
+                }
+              ],
+              "Costs": [
+                {
+                  "Name": "Monetary Cost",
+                  "Unit": "Dolars",
+                  "Value": 0
+                }
+              ]
+            },
+            {
+              "Id": "A2",
+              "Name": "No change dose of CCB",
+              "Preconditions": [
+                {
+                  "Attribute": "SBP",
+                  "Greater-than": 120,
+                  "Less-than": 130
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "E1",
+                  "Probability": 0.84,
+                  "Response": ["SBP= SBP"]
+                },
+                {
+                  "Id": "E2",
+                  "Probability": 0.15,
+                  "Response": ["SBP= SBP+3"]
+                },
+                {
+                  "Id": "E3",
+                  "Probability": 0.01,
+                  "Response": ["S=3"]
+                }
+              ],
+              "Costs": [
+                {
+                  "Name": "Monetary Cost",
+                  "Unit": "Dolars",
+                  "Value": 0
+                }
+              ]
+            },
+            {
+              "Id": "A3",
+              "Name": "Increase dose of ARB",
+              "Preconditions": [
+                {
+                  "Attribute": "SECCB",
+                  "Equals": "false"
+                },
+                {
+                  "Attribute": "SBP",
+                  "Greater-than": 130
+                },
+                {
+                  "Attribute": "Total medicine Dose",
+                  "Less-than": 8
+                },
+                {
+                  "Attribute": "CCB",
+                  "Less-than": 2
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "E1",
+                  "Probability": 0.6,
+                  "Response": ["SBP= SBP-6 & CCB=CCB+1"]
+                },
+                {
+                  "Id": "E2",
+                  "Probability": 0.38,
+                  "Response": ["SBP= SBP-3  & CCB=CCB+1"]
+                },
+                {
+                  "Id": "E3",
+                  "Probability": 0.02,
+                  "Response": ["SBP= SBP-1 & CCB=CCB+1 & SECCB=true"]
+                }
+              ],
+              "Costs": [
+                {
+                  "Name": "Monetary Cost",
+                  "Unit": "Dolars",
+                  "Value": 10
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Id": "T6",
+          "Name": "Administer thiazide diuretic (TD))",
+          "Definition": "Administer thiazide diuretic (TD)",
+          "Preconditions": [
+            {
+              "Attribute": "SBP",
+              "Greater-than": 120
+            }
+          ],
+          "Rules": [],
+          "Metrics": [
+            {
+              "Variable": "S",
+              "Type": "Integer",
+              "Definition": "state of disease progression",
+              "Range": [1, 4]
+            },
+            {
+              "Variable": "TD",
+              "Definition": "Counter of TD dose",
+              "Type": "Integer",
+              "Range": [0, 2]
+            },
+            {
+              "Varible": "SETD",
+              "Definition": "Flag for side effects of TD",
+              "Type": "Boolean",
+              "Range": ["true", "false"]
+            }
+          ],
+          "Activities": [
+            {
+              "Id": "A1",
+              "Name": "Stop TD",
+              "Preconditions": [
+                {
+                  "Attribute": "SETD",
+                  "Equals": "true"
+                },
+                {
+                  "Attribute": "SBP",
+                  "Less-than": 170
+                },
+                {
+                  "Attribute": "Total medicine Dose",
+                  "Greater-than": 0
+                },
+                {
+                  "Attribute": "TD",
+                  "Greater-than": 0
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "E1",
+                  "Probability": 0.5,
+                  "Response": ["SBP= SBP+3 & TD= 0"]
+                },
+                {
+                  "Id": "E2",
+                  "Probability": 0.5,
+                  "Response": ["SBP= SBP & TD= 0"]
+                }
+              ],
+              "Costs": [
+                {
+                  "Name": "Monetary Cost",
+                  "Unit": "Dolars",
+                  "Value": 0
+                }
+              ]
+            },
+            {
+              "Id": "A2",
+              "Name": "No change dose of TD",
+              "Preconditions_Formula": "$0 & $1",
+              "Preconditions": [
+                {
+                  "Attribute": "SBP",
+                  "Greater-than": 120
+                },
+                {
+                  "Attribute": "SBP",
+                  "Less-than": 130
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "E1",
+                  "Probability": 0.84,
+                  "Response": ["SBP= SBP"]
+                },
+                {
+                  "Id": "E2",
+                  "Probability": 0.15,
+                  "Response": ["SBP= SBP+3"]
+                },
+                {
+                  "Id": "E3",
+                  "Probability": 0.01,
+                  "Response": ["S=3"]
+                }
+              ],
+              "Costs": [
+                {
+                  "Name": "Monetary Cost",
+                  "Unit": "Dolars",
+                  "Value": 0
+                }
+              ]
+            },
+            {
+              "Id": "A3",
+              "Name": "Increase dose of ARB",
+              "Preconditions_Formula": "$0 & $1 | ($1 & $3)",
+              "Preconditions": [
+                {
+                  "Attribute": "SETD",
+                  "Equals": "false"
+                },
+                {
+                  "Attribute": "SBP",
+                  "Greater-than": 130
+                },
+                {
+                  "Attribute": "Total medicine Dose",
+                  "Less-than": 8
+                },
+                {
+                  "Attribute": "TD",
+                  "Less-than": 2
+                }
+              ],
+              "Effects": [
+                {
+                  "Id": "E1",
+                  "Probability": 0.6,
+                  "Response": ["SBP= SBP-6 & TD=TD+1"]
+                },
+                {
+                  "Id": "E2",
+                  "Probability": 0.38,
+                  "Response": ["SBP= SBP-3  & TD=TD+1"]
+                },
+                {
+                  "Id": "E3",
+                  "Probability": 0.02,
+                  "Response": ["SBP= SBP-1 & TD=TD+1 & SETD=true"]
+                }
+              ],
+              "Costs": [
+                {
+                  "Name": "Monetary Cost",
+                  "Unit": "Dolars",
+                  "Value": 10
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "Criterion": {
+    "TypeFunction": "Min",
+    "Reward": "Monetary Cost"
+  }
+}

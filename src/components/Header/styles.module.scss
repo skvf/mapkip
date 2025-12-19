@@ -1,0 +1,25 @@
+// @import "./../../../styles/library";
+
+.logoImagem {
+  cursor: pointer;
+  border-radius: 10%;
+  width: 3rem;
+  height: 3rem;
+  margin: 0.25rem;
+}
+
+.signInButton {
+  border-radius: var(--bs-border-radius);
+  background: transparent;
+  border: 0;
+  padding: 0 1.5rem;
+  font-weight: bold;
+  transition: filter 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+
+  &:hover {
+    filter: brightness(0.9);
+  }
+}
